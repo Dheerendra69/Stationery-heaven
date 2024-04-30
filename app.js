@@ -439,7 +439,8 @@ app.post('/login', async (req, res) => {
 
 // Catch-all route for handling other paths
 app.get('*', (req, res) => {
-    res.status(404).render('error');
+    // res.status(404).render('error');
+    res.render('error');
 });
 
 

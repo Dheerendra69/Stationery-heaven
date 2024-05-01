@@ -59,6 +59,10 @@ app.get('/orderPlaced', (req, res)=>{
     res.render('orderPlaced');
 })
 
+app.get('/placeOrder', (req, res)=>{
+    res.render('placeOrder');
+})
+
 // // Route to handle data submission from page1
 // app.post('/submit-data', (req, res) => {
 //     const data = req.body.data;
@@ -265,10 +269,10 @@ const collection= new mongoose.model("users", loginSchema);
 // hbs.registerPartials(partialPath)
 
 app.get('/', (req, res) => {
-    res.render('dummylogin')
+    res.render('login')
 })
 app.get('/login', (req, res) => {
-    res.render('dummylogin')
+    res.render('login')
 })
 
 app.get('/signup', (req, res) => {
@@ -439,8 +443,7 @@ app.post('/login', async (req, res) => {
 
 // Catch-all route for handling other paths
 app.get('*', (req, res) => {
-    // res.status(404).render('error');
-    res.render('error');
+    res.status(404).render('error');
 });
 
 

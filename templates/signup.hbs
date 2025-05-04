@@ -1,58 +1,32 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-        <link rel="stylesheet" href="css/login.css">
-        <style>
-            .container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-            form {
-                width: 100%; /* Set the form width to 100% of its container */
-                max-width: 400px; /* Optional: Set a maximum width to prevent the form from stretching too much */
-                border: 2px solid pink;
-                padding: 20px; /* Added some padding for better spacing */
-            }
-            label, input {
-                height: 50x;
-                width: 100%; /* Set the input field width to 100% of its container (the form) */
-            }
-            .button-container {
-                margin-top: 20px; /* Adjusted margin for better spacing */
-                margin-left: 10px;
-            }
-            .sub {
-                margin-top: 10px;
-            }
-        </style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stationary Heaven</title>
+    <link rel="stylesheet" href="./css/signup.css" />
+  </head>
+  <body>
     <div class="container">
-        <h1>Sign Up</h1>
 
-    <form action="/signup" method="post">
+      <form action="/signup" method="post">
+        <h1>Sign Up</h1>
         <label for="name">Enter name: </label>
-        <input placeholder="name" name="name" type="name">
-        <br>
+        <input placeholder="name" name="name" type="name" />
+        <br />
         <label for="email">Enter email: </label>
-        <input placeholder="email" name="email" type="email">
-        <br>
+        <input placeholder="email" name="email" type="email" />
+        <br />
         <label for="password">Enter password: </label>
-        <input placeholder="Password" name="password" type="password">
-        <br>
-        <input class="sub" type="submit"><br>
-    </form>
-    <div class="button-container">
-       <a href="/login" class="btn">login page</a>
-    <a href="/index" class="btn">home page</a>
-</div>
+        <input placeholder="Password" name="password" type="password" />
+        <br />
+        <input class="sub" type="submit" /><br />
+        <div class="button-container">
+          <a href="/login" class="btn">login page</a>
+          <a href="/index" class="btn">home page</a>
+        </div>
+      </form>
     </div>
 
-
-</body>
+  </body>
 </html>

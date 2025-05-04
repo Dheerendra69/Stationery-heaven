@@ -1,18 +1,16 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="home.css" />
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="index.js" type="module"></script>
-    <script src="cart.js" ></script>
-    <script src="practice.js"></script>
+    <script type="module" src="cart.js"></script>
 
-    <script>
+    {{! <script>
         import {cartData} from './cart.js';
         // --fresh start
 
@@ -95,21 +93,24 @@ function displayCart() {
 
         
       </script>
-   
+    }}
 
-</head>
-<body>
-    <h3 style="text-align: center;">Hello {{naming}}, Welcome to LPU's largest study-chain</h3>
-    
-    <div id="app"></div> <!-- embed the template file content -->
-    <div id="temporaryContent"> <!-- contains main content of this page -->
-        <div class="listProduct"> <!-- to display the product list -->
-            Contents of index file
-        </div>
+  </head>
+  <body>
+    <h3 style="text-align: center;">Hello
+      {{naming}}, Welcome to LPU's largest study-chain</h3>
+
+    <div id="app"></div>
+    <!-- embed the template file content -->
+    <div id="temporaryContent">
+      <!-- contains main content of this page -->
+      <div class="listProduct">
+        <!-- to display the product list -->
+        Contents of index file
+      </div>
     </div>
 
-
-    <script>
+    {{!-- <script>
         
     //    import { cartData } from './cart.js';
 
@@ -200,62 +201,8 @@ form.addEventListener('submit', function(event) {
         const namingValue = "{{ naming }}";
         return namingValue;
         }
-      </script>
+      </script> --}}
 
-         <script src="https://smtpjs.com/v3/smtp.js"></script>
-</body>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+  </body>
 </html>
-
-<script>
-// document.querySelector('.checkOut').addEventListener('click', async () => {
-        //   try {
-        //     const response = await fetch('/checkout', {
-        //       method: 'POST',
-        //       headers: {
-        //         'Content-Type': 'application/json'
-        //       },
-        //       body: JSON.stringify({ items: shoppingCart })
-        //     });
-            
-        //     if (response.ok) {
-        //       window.location.href = '/orderPlaced.html';
-        //     } else {
-        //       alert('Failed to place order');
-        //     }
-        //   } catch (error) {
-        //     console.error('Error:', error);
-        //     alert('Failed to place order');
-        //   }
-        // });
-
-        // -----------------
-    // // Function to submit the form and call print2
-    // function submitForm() {
-    //     event.preventDefault();
-    //     // Call the print2 function
-    //     print2();
-
-    //     // Create a form element
-    //     const form = document.createElement('form');
-    //     form.method = 'POST'; // Set form method to POST
-    //     form.action = '/checkout'; // Set form action to '/checkout'
-
-    //     // Create input element for items
-    //     const itemsInput = document.createElement('input');
-    //     itemsInput.type = 'hidden'; // Hidden input
-    //     itemsInput.name = 'items'; // Name of the input
-    //     itemsInput.value = JSON.stringify(cartData); // Convert items data to JSON string and set as value
-
-    //     // Append the input element to the form
-    //     form.appendChild(itemsInput);
-
-    //     // Append the form to the body
-    //     document.body.appendChild(form);
-
-    //     // Submit the form
-    //     form.submit();
-    // }
-
-
-
-</script>

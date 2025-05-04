@@ -1,6 +1,6 @@
 const products = [
     {
-        id: 1,
+        "id": 1,
         "name":" Filter Paper",
         "price": 2,
         "image": "https://images-cdn.ubuy.co.in/648c4eacbaaa98101230f6ff-premium-filter-paper-15cm-pack-of-100.jpg",

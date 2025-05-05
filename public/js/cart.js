@@ -94,7 +94,7 @@ const cart = () => {
         <img src="${info.image}"/>
         </div>
         <div class="name" >Name</div>
-        <div class="totalPrice">$${info.price * item.quantity}</div>
+        <div class="totalPrice">Rs.${info.price * item.quantity}</div>
         <div class="quantity">
         <span class="minus" data-id="${info.id}">-</span>
         <span>${item.quantity}</span>
@@ -132,10 +132,10 @@ const cart = () => {
       // console.log(x[0]);
       // printArrayElements(x);
       //   const temp = printArrayElements(x);
-    //   console.log(JSON.stringify(temp));
+      //   console.log(JSON.stringify(temp));
       // Set the value of the input field in the form
-    //   document.getElementById("dataField").value = JSON.stringify(temp);
-    //   console.log(document.getElementById("dataField").value);
+      //   document.getElementById("dataField").value = JSON.stringify(temp);
+      //   console.log(document.getElementById("dataField").value);
       document.getElementById("dynamicForm").submit();
     }
   });

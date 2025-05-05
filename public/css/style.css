@@ -17,7 +17,7 @@ button {
 }
 .container {
   width: 900px;
-  margin: auto;
+  /* margin: auto; */
   max-width: 90vw;
   text-align: center;
   padding-top: 10px;
@@ -48,6 +48,8 @@ header {
 }
 .title {
   font-size: xx-large;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 /* cartTab */
 
@@ -79,6 +81,7 @@ header {
   font-family: "Poppins";
   font-weight: 500;
   cursor: pointer;
+  width: 200px;
 }
 .cartTab .btn button.close {
   background-color: #eee;
@@ -104,6 +107,7 @@ body.activeTabCart .container {
 /* list item product */
 .listProduct .item img {
   width: 90%;
+  height: 45%;
   filter: drop-shadow(0 50px 20px #0009);
 }
 .listProduct {
@@ -222,7 +226,7 @@ body.activeTabCart .container {
 .detail svg {
   width: 15px;
 }
-/* .detail .buttons span{
+.detail .buttons span{
     background-color: #555454;
     width: 30px;
     height: 30px;
@@ -231,7 +235,7 @@ body.activeTabCart .container {
     align-items: center;
     border-radius: 50%;
     margin-left: 20px;
-} */
+}
 .detail .buttons button:nth-child(2) {
   background-color: #2f2f2f;
   color: #eee;
@@ -281,19 +285,5 @@ body.activeTabCart .container {
   }
   .detail .buttons {
     justify-content: center;
-  }
-}
-
-@media screen and (min-width: 800px) {
-  .nav__logo {
-    font-size: 10px;
-  }
-  .nav__menu {
-    width: 60px;
-    background-color: pink;
-  }
-  .content {
-    background-color: pink;
-    color: red;
   }
 }

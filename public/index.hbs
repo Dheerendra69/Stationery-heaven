@@ -2,13 +2,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="home.css" />
+    <title>Stationary Heaven</title>
+    <link rel="icon" type="image/jpeg" href="images/Logo.jpeg" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/home.css" />
     <script src="https://smtpjs.com/v3/smtp.js"></script>
-    <script src="index.js" type="module"></script>
-    <script type="module" src="cart.js"></script>
+    <script type="module" src="./js/index.js"></script>
+    <script type="module" src="./js/cart.js"></script>
 
     {{! <script>
         import {cartData} from './cart.js';
@@ -86,7 +86,7 @@ function displayCart() {
             cartContainer.innerHTML = '<h2>Shopping Cart Data:</h2>';
             cartContainer.innerHTML += '<ul>';
             cartData.forEach(function(item) {
-                cartContainer.innerHTML += '<li>' + item.name + ' - $' + item.price + '</li>';
+                cartContainer.innerHTML += '<li>' + item.name + ' - Rs.' + item.price + '</li>';
             });
             cartContainer.innerHTML += '</ul>';
         });
@@ -190,7 +190,7 @@ form.addEventListener('submit', function(event) {
             cartContainer.innerHTML = '<h2>Shopping Cart Data:</h2>';
             cartContainer.innerHTML += '<ul>';
             cartData.forEach(function(item) {
-                cartContainer.innerHTML += '<li>' + item.name + ' - $' + item.price + '</li>';
+                cartContainer.innerHTML += '<li>' + item.name + ' - Rs.' + item.price + '</li>';
             });
             cartContainer.innerHTML += '</ul>';
         });

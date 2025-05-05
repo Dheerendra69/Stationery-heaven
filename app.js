@@ -9,48 +9,22 @@ const app = express();
 const connectDB = require("./config/db.js");
 connectDB();
 
-app.use(bodyparser.urlencoded({ extended: true }));
-const publicpath = path.join(__dirname, "public");
-app.use(express.static(publicpath));
+const publicPath = path.join(__dirname, "public");
+app.use(express.static(publicPath));
 
 // Middleware to parse incoming request bodies
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// -----------
-// data storage javascript part - not a part of routing
-
-let userName; // variable to store username and userEmail upon login
-let userEmail;
-let userOrder; // variable to store user Order
-
-function sendEmail1() {
-  Email.send({
-    Host: "smtp.elasticemail.com",
-    Username: "dheerendrapratapsingh1509@gmail.com",
-    Password: "ECF23215F819034DB816FBC02BB5CCC245A9",
-    To: userEmail, // Use the recipientEmail variable here
-    From: "dheerendrapratapsingh1509@gmail.com",
-    Subject: "Your OTP", // Change this subject as per your requirement
-    Body: `Your order is - ${userOrder}`, // Change the body as per your requirement
-  }).then((message) => {
-    console.log(message);
-    alert(message);
-  });
-}
-
-// -----------
-
-const templatePath = path.join(__dirname, "/templates");
-
+// setting views engine
 app.set("view engine", "hbs");
-app.set("views", templatePath);
-app.use(express.static(templatePath));
-console.log(templatePath);
+app.set("views", publicPath);
 
 app.get("/index", (req, res) => {
   res.render("index");
+});
+app.get("/detail", (req, res) => {
+  res.render("detail");
 });
 
 app.get("/orderPlaced", (req, res) => {
@@ -60,12 +34,6 @@ app.get("/orderPlaced", (req, res) => {
 app.get("/placeOrder", (req, res) => {
   res.render("placeOrder");
 });
-
-// const express = require('express');
-
-// Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
 // Route related to form element
 app.post("/checkout", async (req, res) => {

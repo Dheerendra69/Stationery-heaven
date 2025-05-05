@@ -1,0 +1,26 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error: Page Not Found</title>
+    <link rel="icon" type="image/jpeg" href="images/Logo.jpeg" />
+    <link rel="stylesheet" href="./css/home.css" />
+    <style>
+      body { display: flex; justify-content: center; align-items: center;
+      min-height: 100vh; }
+    </style>
+  </head>
+  <body>
+    <div class="error-message">
+      <h1>Error: Page Not Found</h1>
+      <p>( Please Check URL )</p>
+      <div class="error-bottom-right">
+        <p>( You will be redirected to home page in some time... )</p>
+      </div>
+      <a href="home.html"><button class="error-button">Go to Home</button></a>
+    </div>
+    <script>
+      setTimeout(() => { window.location.href = 'index.html'; }, 10000);
+    </script>
+  </body>
+</html>

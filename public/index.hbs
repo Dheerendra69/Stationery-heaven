@@ -1,0 +1,208 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stationary Heaven</title>
+    <link rel="icon" type="image/jpeg" href="images/Logo.jpeg" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/home.css" />
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script type="module" src="./js/index.js"></script>
+    <script type="module" src="./js/cart.js"></script>
+
+    {{! <script>
+        import {cartData} from './cart.js';
+        // --fresh start
+
+function displayCart() {
+    // Access cartData and display it
+    console.log(cartData);
+}
+
+
+// ------
+
+        // document.querySelector('.checkOut').addEventListener('click', async () => {
+        //   try {
+        //     const response = await fetch('/checkout', {
+        //       method: 'POST',
+        //       headers: {
+        //         'Content-Type': 'application/json'
+        //       },
+        //       body: JSON.stringify({ items: shoppingCart })
+        //     });
+            
+        //     if (response.ok) {
+        //       window.location.href = '/orderPlaced.html';
+        //     } else {
+        //       alert('Failed to place order');
+        //     }
+        //   } catch (error) {
+        //     console.error('Error:', error);
+        //     alert('Failed to place order');
+        //   }
+        // });
+
+    // Function to submit the form and call print2
+    function submitForm() {
+        // Call the print2 function
+        print2();
+
+        // Create a form element
+        const form = document.createElement('form');
+        form.method = 'POST'; // Set form method to POST
+        form.action = '/checkout'; // Set form action to '/checkout'
+
+        // Create input element for items
+        const itemsInput = document.createElement('input');
+        itemsInput.type = 'hidden'; // Hidden input
+        itemsInput.name = 'items'; // Name of the input
+        itemsInput.value = JSON.stringify(getItemsData()); // Convert items data to JSON string and set as value
+
+        // Append the input element to the form
+        form.appendChild(itemsInput);
+
+        // Append the form to the body
+        document.body.appendChild(form);
+
+        // Submit the form
+        form.submit();
+    }
+
+    // Function to get items data
+    function getItemsData() {
+        // Implement the logic to get items data from your page
+        // For example, you can select items and create an array of objects containing item details
+        // Return the array of objects
+    }
+
+    document.getElementById('checkOut').addEventListener('click', function() {
+            // Access the shopping cart data from cart.js
+            var cartData = getShoppingCartData();
+
+            console.log(cartData);
+            // Render the shopping cart data in HTML format
+            var cartContainer = document.getElementById('listCart');
+            cartContainer.innerHTML = '<h2>Shopping Cart Data:</h2>';
+            cartContainer.innerHTML += '<ul>';
+            cartData.forEach(function(item) {
+                cartContainer.innerHTML += '<li>' + item.name + ' - Rs.' + item.price + '</li>';
+            });
+            cartContainer.innerHTML += '</ul>';
+        });
+
+        
+      </script>
+    }}
+
+  </head>
+  <body>
+    <h3 style="text-align: center;">Hello
+      {{naming}}, Welcome to LPU's largest study-chain</h3>
+
+    <div id="app"></div>
+    <!-- embed the template file content -->
+    <div id="temporaryContent">
+      <!-- contains main content of this page -->
+      <div class="listProduct">
+        <!-- to display the product list -->
+        Contents of index file
+      </div>
+    </div>
+
+    {{!-- <script>
+        
+    //    import { cartData } from './cart.js';
+
+// --fresh start
+
+// function displayCart() {
+    // Access cartData and display it
+   // console.log(cartData);
+// } 
+
+
+// ------
+
+        
+    // --------------
+    // Assuming cartData is already defined in your cart.js file
+
+// Create a form element
+const form = document.createElement('form');
+form.method = 'POST'; // Set form method to POST
+form.action = '/checkout'; // Set form action to '/checkout'
+
+// Append the form to the document body (or any other desired location)
+document.body.appendChild(form);
+
+// Attach cartData to the form data
+form.addEventListener('submit', function(event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+
+    // Create a FormData object from the form
+    const formData = new FormData(form);
+
+    // Append cartData to the FormData object
+    formData.append('cartData', JSON.stringify(cartData));
+
+    // Create a new request object
+    const request = new XMLHttpRequest();
+
+    // Open a POST request to the form's action URL
+    request.open('POST', form.action);
+
+    // Set the request header (optional)
+    // request.setRequestHeader('Content-Type', 'application/json');
+
+    // Define a function to handle the response
+    request.onload = function() {
+        if (request.status >= 200 && request.status < 300) {
+            // Handle successful response
+            console.log('Form submitted successfully');
+        } else {
+            // Handle error response
+            console.error('Form submission failed');
+        }
+    };
+
+    // Send the FormData object as the request body
+    request.send(formData);
+});
+
+
+    // ----------------
+
+    // Function to get items data
+    function getItemsData() {
+        // Implement the logic to get items data from your page
+        // For example, you can select items and create an array of objects containing item details
+        // Return the array of objects
+    }
+
+    document.getElementById('checkOut').addEventListener('click', function() {
+            // Access the shopping cart data from cart.js
+            var cartData = getShoppingCartData();
+
+            // Render the shopping cart data in HTML format
+            var cartContainer = document.getElementById('cartContainer');
+            cartContainer.innerHTML = '<h2>Shopping Cart Data:</h2>';
+            cartContainer.innerHTML += '<ul>';
+            cartData.forEach(function(item) {
+                cartContainer.innerHTML += '<li>' + item.name + ' - Rs.' + item.price + '</li>';
+            });
+            cartContainer.innerHTML += '</ul>';
+        });
+
+        const namingVariable = "{{ naming }}";
+        // to return naming variable
+        function callingNaming(){
+        const namingValue = "{{ naming }}";
+        return namingValue;
+        }
+      </script> --}}
+
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+  </body>
+</html>

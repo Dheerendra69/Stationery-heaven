@@ -5,8 +5,7 @@ Stationary Heaven is a basic e-commerce web application built for selling statio
 ### 🔐 Hero Page
 ![Hero Page](./website-demo/Hero-Page.jpeg)
 ---
----
-
+## Live Demo -  https://stationaryheaven-final.onrender.com/
 
 ## 🚀 Features
 
@@ -28,7 +27,5 @@ Stationary Heaven is a basic e-commerce web application built for selling statio
 - **Frontend**: HTML, CSS, JavaScript
 
 ---
-
-### Live Demo -  https://stationaryheaven-final.onrender.com/
 
 Credits - https://youtu.be/gXWohFYrI0M?si=vo1QXOQxSJe0dZ7B 

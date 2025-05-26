@@ -20,6 +20,17 @@ app.use(express.json());
 app.set("view engine", "hbs");
 app.set("views", publicPath);
 
+app.get("/", (req, res) => {
+  res.render("login");
+});
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+app.get("/signup", (req, res) => {
+  res.render("signup");
+});
+
 app.get("/index", (req, res) => {
   res.render("index");
 });
@@ -119,16 +130,6 @@ const loginSchema = new mongoose.Schema({
 // const collection= new mongoose.model("users", LoginSchema);
 const collection = new mongoose.model("users", loginSchema);
 
-app.get("/", (req, res) => {
-  res.render("login");
-});
-app.get("/login", (req, res) => {
-  res.render("login");
-});
-
-app.get("/signup", (req, res) => {
-  res.render("signup");
-});
 
 // Route to handle forgot password request
 app.post("/forgotpassword", async (req, res) => {

@@ -18,11 +18,11 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap; /* Allow items to wrap to next line */
+  flex-wrap: wrap;
   margin: 20px;
 }
 .labcontent {
-  position: relative; /* Make the labcontent a positioning context */
+  position: relative;
   width: 350px;
   height: 300px;
   padding: 20px;
@@ -32,13 +32,12 @@ h1 {
 }
 
 .labcontent button {
-  position: absolute; /* Make the button positioned within labcontent */
-  bottom: 0; /* Place the button at the bottom of the labcontent */
+  position: absolute;
+  bottom: 0;
   left: 0;
-  right: 0; /* Stretch the button horizontally across labcontent */
+  right: 0;
 }
 
-/* Alternate background colors for even and odd elements */
 .labcontent:nth-child(even) {
   background-color: #9b4444;
 }
@@ -47,10 +46,9 @@ h1 {
   background-color: #c68484;
 }
 
-/* Reverse background color on hover */
 .labcontent:hover {
-  background-color: #da5858; /* Change to desired hover color */
-  color: #000; /* Change text color on hover (optional) */
+  background-color: #da5858;
+  color: #000;
   cursor: pointer;
 }
 
@@ -69,7 +67,7 @@ h1 {
   transition: all 0.3s ease;
   cursor: pointer;
   width: 50%;
-  display: block; /* Make the button occupy the full width on a new line */
+  display: block;
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 23%;

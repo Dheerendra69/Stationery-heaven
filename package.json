@@ -4,7 +4,8 @@
   "description": "",
   "main": "api/index.js",
   "scripts": {
-    "start": "nodemon api/index.js"
+    "start": "node api/index.js",
+    "dev": "nodemon api/index.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,7 @@
   "dependencies": {
     "dotenv": "^16.5.0",
     "express": "^4.19.2",
+    "express-handlebars": "^8.0.3",
     "hbs": "^4.2.0",
     "mongodb": "^6.5.0",
     "mongoose": "^8.3.2",

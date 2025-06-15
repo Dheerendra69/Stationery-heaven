@@ -1,8 +1,10 @@
 require("dotenv").config();
 const express = require("express");
-const bodyparser = require("body-parser");
 const path = require("path");
 const mongoose = require("mongoose");
+const exphbs = require("express-handlebars");
+const userRoutes = require("../routes/userRoutes.js");
+const orderRoutes = require("../routes/orderRoutes");
 const app = express();
 
 // connecting mongoDB
@@ -16,20 +18,21 @@ app.use(express.static(publicPath));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Set up handlebars with layout support
+
+// app.engine(
+//   "hbs",
+//   exphbs.engine({
+//     extname: "hbs",
+//     layoutsDir: __dirname + "/public/layouts",
+//     partialsDir: __dirname + "/public/partials",
+//     // No defaultLayout
+//   })
+// );
+
 // setting views engine
 app.set("view engine", "hbs");
 app.set("views", publicPath);
-
-app.get("/", (req, res) => {
-  res.render("login");
-});
-app.get("/login", (req, res) => {
-  res.render("login");
-});
-
-app.get("/signup", (req, res) => {
-  res.render("signup");
-});
 
 app.get("/index", (req, res) => {
   res.render("index");
@@ -71,142 +74,72 @@ app.post("/checkout", async (req, res) => {
   //   }
 });
 
-// ---------
-
-// placeOrder page - WORKING
-
-// Server-side JavaScript (Node.js with Express and MongoDB)
-
-// MongoDB setup
-const Order = mongoose.model("Order", {
-  orderId: String,
-  customerName: String,
-  orderDate: Date,
-  gmail: String,
-  items: Array,
-  shop: String,
+app.get("/", (req, res) => {
+  res.render("login");
 });
 
-// Endpoint to save order
-app.post("/saveOrder", (req, res) => {
-  const orderData = req.body;
-
-  // Create new order document
-  const newOrder = new Order({
-    orderId: orderData.orderId,
-    customerName: orderData.customerName,
-    orderDate: orderData.orderDate,
-    gmail: orderData.gmail,
-    items: orderData.items, // Assuming items are collected elsewhere
-    shop: orderData.shop,
-  });
-  // Save order to MongoDB
-  newOrder
-    .save()
-    .then(() => {
-      res.status(302); // Redirect to orderPlaced.html with status code 302 (Temporary Redirect)
-    })
-    .catch((error) => {
-      console.error("Error saving order:", error);
-      res.sendStatus(500); // Send error response
-    });
+app.get("/login", (req, res) => {
+  res.render("login");
 });
 
-const loginSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    lowercase: true,
-  },
-  name: {
-    type: String,
-  },
-  password: {
-    type: String,
-    required: true,
-    // You may want to add more validation for password strength
-  },
+app.get("/signup", (req, res) => {
+  res.render("signup");
 });
 
-// const collection= new mongoose.model("users", LoginSchema);
-const collection = new mongoose.model("users", loginSchema);
-
+app.post("/login", userRoutes);
+app.post("/signup", userRoutes);
+app.post("/forgotPassword", userRoutes);
+app.post("/saveOrder", orderRoutes);
 
 // Route to handle forgot password request
-app.post("/forgotpassword", async (req, res) => {
-  const { email, newPassword } = req.body;
+// app.post("/forgotpassword", async (req, res) => {
+//   const { email, newPassword } = req.body;
 
-  try {
-    const temp = await collection.find();
-    console.log(temp);
+//   try {
+//     const temp = await collection.find();
+//     console.log(temp);
 
-    const user = await collection.find({ email }).limit(1);
+//     const user = await collection.find({ email }).limit(1);
 
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
 
-    user.password = newPassword;
-    await user.save();
+//     user.password = newPassword;
+//     await user.save();
 
-    res.status(200).json({ message: "Password updated successfully" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
+//     res.status(200).json({ message: "Password updated successfully" });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Internal server error" });
+//   }
+// });
 
 app.get("/setNewPassword", (req, res) => {
   res.render("setNewPassword");
 });
 
-app.post("/signup", async (req, res) => {
-  const data = {
-    name: req.body.name,
-    password: req.body.password,
-    email: req.body.email, // Hash the password before storing
-  };
-  userName = req.body.name;
-  userEmail = req.body.email;
-  console.log(userName + " " + userEmail);
-
-  console.log(data["name"]);
-  console.log(data["password"]);
-  console.log(data["email"]);
-
-  try {
-    const existingUser = await collection.findOne({ email: req.body.email });
-    if (existingUser) {
-      res.status(409).send("User already exists"); // Use a specific status code for conflicts
-      return;
-    }
-
-    await collection.insertMany(data); // Use insertOne instead of insertMany for single documents
-    res.status(201).render("index", { naming: req.body.name });
-  } catch (error) {
-    console.error("Error during signup:", error);
-    res.status(500).send("Internal server error"); // More informative error message
-  }
+// serving static files
+app.get("/home", (req, res) => {
+  res.render("home");
 });
-
-app.post("/login", async (req, res) => {
-  try {
-    const check = await collection.findOne({ name: req.body.name });
-
-    userName = check.name;
-    userEmail = check.email;
-    console.log(userName + " " + userEmail);
-    if (check.password === req.body.password) {
-      res.status(201).render("index", { naming: `${req.body.name}` });
-    } else {
-      res.send("incorrect password");
-    }
-  } catch (e) {
-    console.log(e);
-
-    res.send("wrong details");
-  }
+app.get("/productsBiotech", (req, res) => {
+  res.render("productsBiotech");
 });
-
+app.get("/productsMec", (req, res) => {
+  res.render("productsMec");
+});
+app.get("/productsElec", (req, res) => {
+  res.render("productsElec");
+});
+app.get("/about", (req, res) => {
+  res.render("about", {
+    title: "About Us",
+  });
+});
+app.get("/forgotPassword", (req, res) => {
+  res.render("forgotPassword");
+});
 app.get("*", (req, res) => {
   res.status(404).render("error");
 });

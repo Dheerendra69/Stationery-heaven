@@ -1,120 +1,137 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Place Order</title>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">  boxicons
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+    boxicons
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"  >
-    <link rel="stylesheet" href="./css/home.css">
-    <link rel="stylesheet" href="./css/placeOrder.css">
-    <link rel="icon" type="image/jpeg" href="images/Logo.jpeg">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/home.css" />
+    <link rel="stylesheet" href="./css/placeOrder.css" />
+    <link rel="icon" type="image/jpeg" href="images/Logo.jpeg" />
+  </head>
+  <body>
 
     <!-- Header -->
     <header class="header" id="header">
-        <nav class="nav container">
-            <a href="/index" class="nav__logo">
-                StationaryHeaven</a>
+      <nav class="nav container">
+        <a href="/index" class="nav__logo">
+          StationaryHeaven</a>
 
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
-                    <li class="nav__item">
-                        <a href="/index" class="nav__link active-link">
-                            <i class="fa-solid fa-store"></i>
-                            <span class="nav__name">Home</span>
-                        </a>
-                    </li> 
-                </ul>
-            </div>
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="/index" class="nav__link active-link">>
+                <i class="custom_icons fa-solid fa-store"></i>
+                <span class="nav__name">Home</span>
+              </a>
+            </li>
+          </ul>
+        </div>
 
-        </nav>
+      </nav>
     </header>
 
     <!-- Header Section Ends -->
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <form id="order-form" action="/saveOrder" method="POST">
-        <h1>Place Order</h1>
-        <div class="form-group">
-            <label for="orderId">Order ID:</label>
-            <input type="text" id="orderId" name="orderId" required>
-        </div>
-        <div class="form-group">
-            <label for="customerName">Customer Name:</label>
-            <input type="text" id="customerName" name="customerName" required>
-        </div>
-        <div class="form-group">
-            <label for="orderDate">Order Date:</label>
-            <input type="date" id="orderDate" name="orderDate" required>
-        </div>
-        <div class="form-group">
-            <label for="gmail">Gmail:</label>
-            <input type="email" id="gmail" name="gmail" placeholder="user@gmail.com" required>
-        </div>
-        <label for="pdfFile">Select PDF File:</label>
-        <input type="file" id="pdfFile" name="pdfFile" accept=".pdf">
-        <br>
-        
-        <h2>Items</h2>
-        <div id="items-container">
-            </div>
-        <button type="button" id="add-item">Add Item</button>
-        <div class="form-group">
-            <label for="shop">Shop:</label>
-            <select id="shop" name="shop" required>
-                <option value="">Select Shop</option>
-                <option value="lpu26block">lpu26block</option>
-                <option value="lpu27block">lpu27block</option>
-                <option value="lpu28block">lpu28block</option>
-                <option value="lpu29block">lpu29block</option>
-                <option value="lpu30block">lpu30block</option>
-                <option value="lpu31block">lpu31block</option>
-                <option value="lpu32block">lpu32block</option>
-                <option value="lpu33block">lpu33block</option>
-                <option value="lpu34block">lpu34block</option>
-            </select>
-        </div>
-        <h2>Order Summary</h2>
-        <div id="order-summary">
-            <p>Total Amount: <span id="total-amount">0</span></p>
-        </div>
-        <div class="button-container">
-            <button type="submit" onclick="orderPlaced()">Place Order</button>
-        </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <form id="order-form">
+      <h1>Place Order</h1>
+      <div class="form-group">
+        <label for="orderId">Order ID:</label>
+        <input type="text" id="orderId" name="orderId" required />
+      </div>
+      <div class="form-group">
+        <label for="customerName">Customer Name:</label>
+        <input type="text" id="customerName" name="customerName" required />
+      </div>
+      <div class="form-group">
+        <label for="orderDate">Order Date:</label>
+        <input type="date" id="orderDate" name="orderDate" required />
+      </div>
+      <div class="form-group">
+        <label for="gmail">Gmail:</label>
+        <input
+          type="email"
+          id="gmail"
+          name="gmail"
+          placeholder="user@gmail.com"
+          required
+        />
+      </div>
+      <label for="pdfFile">Select PDF File:</label>
+      <input type="file" id="pdfFile" name="pdfFile" accept=".pdf" />
+      <br />
+
+      <h2>Items</h2>
+      <div id="items-container">
+      </div>
+      <button type="button" id="add-item">Add Item</button>
+      <div class="form-group">
+        <label for="shop">Shop:</label>
+        <select id="shop" name="shop" required>
+          <option value="">Select Shop</option>
+          <option value="lpu26block">lpu26block</option>
+          <option value="lpu27block">lpu27block</option>
+          <option value="lpu28block">lpu28block</option>
+          <option value="lpu29block">lpu29block</option>
+          <option value="lpu30block">lpu30block</option>
+          <option value="lpu31block">lpu31block</option>
+          <option value="lpu32block">lpu32block</option>
+          <option value="lpu33block">lpu33block</option>
+          <option value="lpu34block">lpu34block</option>
+        </select>
+      </div>
+      <h2>Order Summary</h2>
+      <div id="order-summary">
+        <p>Total Amount: <span id="total-amount">0</span></p>
+      </div>
+      <div class="button-container">
+        <button type="submit">Place Order</button>
+      </div>
     </form>
 
     <footer id="footer">
-        <h1 class="text-center">Stationary Heaven</h1>
-        <p class="text-center">Elevate your everyday with beautiful stationery. </p>
-        <div class="icons text-center">
-            <a href="https://twitter.com/home"><i class="bx bxl-twitter"></i></a>
-            <a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a>
-           <a href="https://www.google.com/"> <i class="bx bxl-google"></i></a>
-           <a href="https://www.skype.com/en/"> <i class="bx bxl-skype"></i></a>
-           <a href="https://www.instagram.com/"> <i class="bx bxl-instagram"></i></a>
-        </div>
-        <div class="copyright text-center">
-            &copy; Copyright <strong><span>Stationary Heaven</span></strong>. All Rights Reserved
-        </div>
-        <div class="credite text-center">
-            Designed By <a href="#" style="color:orange">Dheerendra Singh</a>
-        </div>
-    </footer>  
-    
+      <h1 class="text-center">Stationary Heaven</h1>
+      <p class="text-center">Elevate your everyday with beautiful stationery.
+      </p>
+      <div class="icons text-center">
+        <a href="https://twitter.com/home"><i
+            class="custom_icons bx bxl-twitter"
+          ></i></a>
+        <a href="https://www.facebook.com/"><i
+            class="custom_icons bx bxl-facebook"
+          ></i></a>
+        <a href="https://www.google.com/">
+          <i class="custom_icons bx bxl-google"></i></a>
+        <a href="https://www.skype.com/en/">
+          <i class="custom_icons bx bxl-skype"></i></a>
+        <a href="https://www.instagram.com/">
+          <i class="custom_icons bx bxl-instagram"></i></a>
+      </div>
+      <div class="copyright text-center">
+        &copy; Copyright
+        <strong><span>Stationary Heaven</span></strong>. All Rights Reserved
+      </div>
+      <div class="credite text-center">
+        Designed By
+        <a href="#" style="color:orange">Dheerendra Singh</a>
+      </div>
+    </footer>
+
     <script src="./js/placeOrder.js"></script>
-    <script>
-        function orderPlaced(){
-            window.alert("order placed");
-            window.location.href="orderPlaced.html";
-        }
-    </script>
-</body>
+
+  </body>
 </html>

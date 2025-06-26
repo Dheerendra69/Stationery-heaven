@@ -85,7 +85,7 @@ img {
 .nav {
   height: var(--header-height);
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   background-color: #d9edbf;
 }
@@ -105,6 +105,7 @@ img {
   font-family: "Dancing Script";
   font-size: 30px;
   font-weight: 600;
+  margin-left: 10px;
 }
 
 .nav__list,
@@ -126,7 +127,7 @@ img {
 
 .nav__item {
   height: 50px;
-  width: 100px;
+  width: 120px;
 }
 
 .nav__name {
@@ -218,42 +219,102 @@ p {
 /* Home Page CSS Ends */
 
 /* Bio-tech CSS */
-
+/* Individual Sections */
+/* Main container layout */
 .item-container {
-  background-color: transparent;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  padding: 40px;
+  background: linear-gradient(135deg, #1f1c2c, #928dab);
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
+/* Individual card style */
 .item-content {
-  margin: 20px;
-  padding: 10px;
+  background-color: #2e2e38;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  padding: 20px;
   text-align: center;
-  color: white;
-  border: 2px solid black;
-  border-radius: 10px;
-  height: 400px;
-  width: 22%;
+  color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   opacity: 0;
-  animation: fadeIn 2s ease-in forwards, bounce 1s infinite alternate,
-    pulsateGlow 2s linear infinite;
-  transition: background-color 0.3s ease;
-  background-color: grey;
+  animation: fadeIn 1s ease-in forwards;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
+/* Hover animation */
 .item-content:hover {
-  transform: scale(1.1);
-  color: #c9d6df;
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.15);
+  background-color: #383847;
 }
 
+/* Image styling */
 .item-content img {
-  width: 300px;
-  height: 280px;
-  border: 2px solid white;
-  border-radius: 10px;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 3px solid #ffffff20;
+  margin-bottom: 16px;
 }
+
+/* Title or content below image */
+.item-content h3 {
+  margin: 12px 0 6px;
+  font-size: 1rem;
+  color: #f3f3f3;
+}
+
+.item-content p {
+  font-size: 0.95rem;
+  color: #c0c0c0;
+}
+
+/* Entry animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Optional subtle glow animation */
+@keyframes pulsateGlow {
+  0% {
+    box-shadow: 0 0 5px #fff2;
+  }
+  50% {
+    box-shadow: 0 0 15px #fff4;
+  }
+  100% {
+    box-shadow: 0 0 5px #fff2;
+  }
+}
+
+/* Responsive fallback (just in case) */
+@media (max-width: 480px) {
+  .item-container {
+    padding: 20px;
+  }
+
+  .item-content {
+    padding: 16px;
+  }
+}
+
+/* end */
 
 .btn {
   background-color: #f3f7fe;
@@ -270,47 +331,6 @@ p {
   box-shadow: 0 0 0 5px #3b83f65f;
   color: #fff;
   cursor: pointer;
-}
-
-.btn-2 {
-  padding: 15px 25px;
-  border: unset;
-  border-radius: 15px;
-  color: #212121;
-  z-index: 1;
-  background: #e8e8e8;
-  position: relative;
-  font-weight: 1000;
-  font-size: 17px;
-  margin: 10px;
-  -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
-  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
-  transition: all 250ms;
-  overflow: hidden;
-}
-
-.btn-2::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0;
-  border-radius: 15px;
-  background-color: #212121;
-  z-index: -1;
-  -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
-  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
-  transition: all 250ms;
-}
-
-.btn-2:hover {
-  color: #e8e8e8;
-  cursor: pointer;
-}
-
-.btn-2:hover::before {
-  width: 100%;
 }
 
 /* Odd containers hover effect */
@@ -382,23 +402,77 @@ p {
 }
 
 /* footer */
-
 .about {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
   margin: 2rem auto;
-  max-width: 90%;
+  max-width: 1200px;
+  padding: 1rem;
 }
 
 .about img {
-  width: 40%;
-  object-fit: cover;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.about > div:first-child {
+  flex: 1 1 40%;
 }
 
 .about-text {
-  width: 60%;
+  flex: 1 1 55%;
   padding: 1rem;
-  font-size: 20px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.about-text h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #2b2b2b;
+}
+
+.about-text .btn {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.about-text .btn:hover {
+  background-color: #357abd;
+}
+
+/* Responsive for small devices */
+@media (max-width: 768px) {
+  .about {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about > div {
+    width: 100%;
+  }
+
+  .about-text {
+    text-align: center;
+  }
 }
 
 .text-center {
@@ -423,6 +497,7 @@ p {
   border: 3px solid white;
   border-radius: 10px;
   text-align: center;
+  margin: 10px;
 }
 
 .labcontent button {
@@ -524,10 +599,6 @@ p {
   margin-bottom: 10px;
 }
 
-/* about ends */
-
-/* error css */
-
 .error-message {
   text-align: center;
   padding: 20px;
@@ -596,8 +667,6 @@ p {
   right: 40px;
 }
 
-/* key frames */
-
 @keyframes bounce {
   0% {
     transform: translateY(0);
@@ -641,7 +710,6 @@ p {
   }
 }
 
-/* For medium devices */
 @media screen and (min-width: 576px) {
   .nav__list {
     justify-content: center;

@@ -132,6 +132,9 @@ app.get("/productsMec", (req, res) => {
 app.get("/productsElec", (req, res) => {
   res.render("productsElec");
 });
+app.get("/labManual", (req, res) => {
+  res.render("labManual");
+});
 app.get("/about", (req, res) => {
   res.render("about", {
     title: "About Us",

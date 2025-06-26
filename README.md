@@ -4,7 +4,7 @@ Stationary Heaven is a basic e-commerce web application built for selling statio
 
 ### 🔐 Hero Page
 ![Hero Page](./website-demo/Hero-Page.jpeg)
-
+---
 ---
 
 

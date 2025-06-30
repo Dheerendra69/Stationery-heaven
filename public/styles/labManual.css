@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+  margin: 0;
+  background-color: #76885b;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.lab-manuals-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+.labcontent {
+  position: relative;
+  width: 350px;
+  height: 300px;
+  padding: 20px;
+  border: 3px solid white;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.labcontent button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.labcontent:nth-child(even) {
+  background-color: #9b4444;
+}
+
+.labcontent:nth-child(odd) {
+  background-color: #c68484;
+}
+
+.labcontent:hover {
+  background-color: #da5858;
+  color: #000;
+  cursor: pointer;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #ff5252;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  width: 50%;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 23%;
+}
+
+.btn:hover {
+  background-color: #fff;
+  color: #ff5252;
+  border: 2px solid #ff5252;
+  box-shadow: 5px 5px 0px #ff5252;
+}
+
+.btn:active {
+  background-color: #fcf414;
+  box-shadow: none;
+  transform: translateY(4px);
+}

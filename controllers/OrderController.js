@@ -1,23 +1,25 @@
 const OrderDB = require("../models/Order");
 
 const saveOrder = async (req, res) => {
-  const orderData = req.body;
-  const newOrder = new OrderDB({
-    orderId: orderData.orderId,
-    customerName: orderData.customerName,
-    orderDate: orderData.orderDate,
-    gmail: orderData.gmail,
-    items: orderData.items,
-    shop: orderData.shop,
-  });
-  newOrder
-    .save()
-    .then(() => {
-      res.status(302).send("orderPlaced");
-    })
-    .catch((error) => {
-      res.sendStatus(500).json("Error saving order" + error);
+  try {
+    const { orderId, customerName, orderDate, gmail, items, shop } = req.body;
+
+    const newOrder = new OrderDB({
+      orderId,
+      customerName,
+      orderDate,
+      gmail,
+      items,
+      shop,
     });
+
+    await newOrder.save();
+
+    res.status(200).json({ message: "Order placed successfully" });
+  } catch (error) {
+    console.error("Error saving order:", error);
+    res.status(500).json({ error: "Error saving order" });
+  }
 };
 
 module.exports = { saveOrder };

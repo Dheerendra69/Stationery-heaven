@@ -51,12 +51,8 @@ const cart = () => {
           quantity: cartItem.quantity,
         };
       }
-      return null; // Handle if product is not found
+      return null;
     });
-
-    console.log(cartItemsWithDetails);
-
-    // ----
 
     localStorage.setItem("cart", JSON.stringify(shoppingCart));
     refreshCartHTML();
@@ -73,19 +69,19 @@ const cart = () => {
     if (product) {
       return product.price * cartItem.quantity;
     }
-    return 0; // Return 0 if product is not found
+    return 0;
   }
 
   const refreshCartHTML = () => {
-    let listHTML = document.querySelector(".listCart"); // to display the list
-    let totalHTML = document.querySelector(".icon-cart span"); // number of products in the list
-    let totalQuantity = 0; // initially totalQuantity is 0
+    let listHTML = document.querySelector(".listCart");
+    let totalHTML = document.querySelector(".icon-cart span");
+    let totalQuantity = 0;
     listHTML.innerHTML = null;
     console.log("shopping Cart: ");
     console.log(shoppingCart);
     shoppingCart.forEach((item) => {
       totalQuantity = totalQuantity + item.quantity;
-      let position = products.findIndex((value) => value.id == item.product_id); // find location of item in the products table
+      let position = products.findIndex((value) => value.id == item.product_id);
       let info = products[position];
       let newItem = document.createElement("div");
       newItem.classList.add("item");
@@ -93,7 +89,7 @@ const cart = () => {
         <div class="image">
         <img src="${info.image}"/>
         </div>
-        <div class="name" >Name</div>
+        <div class="name" >"${info.name}"</div>
         <div class="totalPrice">Rs.${info.price * item.quantity}</div>
         <div class="quantity">
         <span class="minus" data-id="${info.id}">-</span>
@@ -108,9 +104,8 @@ const cart = () => {
     totalHTML.innerText = totalQuantity;
   };
 
-  // event click
   document.addEventListener("click", (event) => {
-    let buttonClick = event.target; // this stores the element that was clicked
+    let buttonClick = event.target;
     let idProduct = buttonClick.dataset.id;
     let position = shoppingCart.findIndex((value) => {
       return value.product_id == idProduct;
@@ -122,21 +117,49 @@ const cart = () => {
     ) {
       quantity++;
       setProductInCart(idProduct, quantity, position);
-      // console.log(naming);
     } else if (buttonClick.classList.contains("minus")) {
       quantity--;
       setProductInCart(idProduct, quantity, position);
-      // console.log(naming);
     } else if (buttonClick.classList.contains("checkOut")) {
-      // console.log(3);
-      // console.log(x[0]);
-      // printArrayElements(x);
-      //   const temp = printArrayElements(x);
-      //   console.log(JSON.stringify(temp));
-      // Set the value of the input field in the form
-      //   document.getElementById("dataField").value = JSON.stringify(temp);
-      //   console.log(document.getElementById("dataField").value);
-      document.getElementById("dynamicForm").submit();
+      console.log("checkout button clicked");
+
+      const cartData = localStorage.getItem("cart");
+
+      if (!cartData) {
+        alert("Your cart is empty!");
+        return;
+      }
+
+      const shoppingCart = JSON.parse(cartData);
+
+      const orderPayload = {
+        items: shoppingCart,
+        customerName: "anonymous",
+        gmail: "anonymous@gmail.com",
+        shop: "lpu30block",
+      };
+
+      fetch("/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderPayload),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.message === "Order saved successfully") {
+            alert("Order placed successfully!");
+            localStorage.removeItem("cart");
+            window.location.href = "/index";
+          } else {
+            alert("Failed to place order");
+          }
+        })
+        .catch((err) => {
+          console.error("Checkout error:", err);
+          alert("Something went wrong while placing your order.");
+        });
     }
   });
   const initApp = () => {
@@ -146,37 +169,6 @@ const cart = () => {
     refreshCartHTML();
   };
   initApp();
-
-  // --------
-
-  // variable to store email of user
-  //   const username = callingNaming();
-  //   console.log(username);
-
-  //   // function to generate order ID
-  //   function generateRandomOrderId() {
-  //     return "ORD" + Math.floor(1000 + Math.random() * 9000);
-  //   }
-
-  //   function printArrayElements(array) {
-  //     let jsonArray = []; // Initialize an empty array to store JSON objects
-  //     jsonArray.push({ name: username }); // to push username
-  //     jsonArray.push({ "order-ID": generateRandomOrderId() });
-  //     jsonArray.push({ Date: new Date() });
-
-  //     let materials = [];
-  //     array.forEach(function (element) {
-  //       let jsonObject = {
-  //         product_id: element.product_id,
-  //         quantity: element.quantity,
-  //       };
-  //       materials.push(jsonObject); // Push the JSON object to the jsonArray
-  //     });
-  //     jsonArray.push(materials);
-
-  //     return jsonArray; // Return the array of JSON objects
-  //   }
-  //   printArrayElements(x);
 };
 export default cart;
 export { cartData };

@@ -1,7 +1,7 @@
 document
   .getElementById("order-form")
   .addEventListener("submit", function (event) {
-    event.preventDefault(); 
+    event.preventDefault();
     const formData = new FormData(this);
     const jsonData = {};
     formData.forEach((value, key) => {
@@ -27,6 +27,12 @@ document
         } else {
           console.error("Failed to place order");
         }
+      })
+      .then(() => {
+        window.alert("Order placed successfully");
+        setTimeout(() => {
+          window.location.href = "/home";
+        }, 1000);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -67,7 +73,7 @@ const orderForm = document.getElementById("order-form");
 const totalAmountSpan = document.getElementById("total-amount");
 
 const itemPrices = {
-  Printouts: 2, 
+  Printouts: 2,
   Pens: 10,
   Dusters: 15,
   Markers: 20,
@@ -75,7 +81,7 @@ const itemPrices = {
   Diaries: 50,
 };
 
-let itemCount = 0; 
+let itemCount = 0;
 
 addItemButton.addEventListener("click", () => {
   itemCount++;

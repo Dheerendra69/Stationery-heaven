@@ -62,6 +62,7 @@ function printProductDetails(productId) {
 
 function printlistCartItems() {
   let addCartItems = document.querySelectorAll(".listCart");
+  console.log("printing list cart items");
   addCartItems.forEach((item) => {
     let productId = item.dataset.id;
     printProductDetails(productId); // Call the function directly

@@ -3,7 +3,8 @@ const express = require("express");
 const path = require("path");
 const hbs = require("hbs");
 const userRoutes = require("../routes/userRoutes.js");
-const orderRoutes = require("../routes/orderRoutes");
+const orderRoutes = require("../routes/orderRoutes.js");
+const cartRoutes = require("../routes/cartRoutes.js");
 const app = express();
 
 // connecting mongoDB
@@ -98,8 +99,10 @@ app.get("/forgotPassword", (req, res) => {
 
 app.post("/login", userRoutes);
 app.post("/signup", userRoutes);
+app.post("/register", userRoutes);
 app.post("/forgotPassword", userRoutes);
 app.post("/saveOrder", orderRoutes);
+app.post("/checkout", cartRoutes);
 
 // Route to handle forgot password request
 // app.post("/forgotpassword", async (req, res) => {
@@ -126,29 +129,29 @@ app.post("/saveOrder", orderRoutes);
 // });
 
 // Route related to form element
-app.post("/checkout", async (req, res) => {
-  res.render("orderPlaced");
-  //   try {
-  //     const { dataField } = req.body;
-  //     const items = JSON.parse(dataField); // Parse the JSON string to extract the items array
-  //     console.log(items);
+// app.post("/checkout", async (req, res) => {
+// res.render("orderPlaced");
+//   try {
+//     const { dataField } = req.body;
+//     const items = JSON.parse(dataField); // Parse the JSON string to extract the items array
+//     console.log(items);
 
-  //     userOrder = items;
-  //     console.log("Your order is: ");
-  //     console.log(userOrder);
-  //     // sendEmail1();
+//     userOrder = items;
+//     console.log("Your order is: ");
+//     console.log(userOrder);
+//     // sendEmail1();
 
-  //     // Save the order with the extracted items
-  //     const order = new Order({ items });
-  //     await order.save();
+//     // Save the order with the extracted items
+//     const order = new Order({ items });
+//     await order.save();
 
-  //     // Send a response to the client
-  //     res.redirect("orderPlaced");
-  //   } catch (error) {
-  //     console.log(error);
-  //     res.status(500).json({ error: "Internal Server Error" });
-  //   }
-});
+//     // Send a response to the client
+//     res.redirect("orderPlaced");
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ error: "Internal Server Error" });
+//   }
+// });
 
 app.get("*", (req, res) => {
   res.status(404).render("error");

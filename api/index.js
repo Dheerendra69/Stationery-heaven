@@ -104,54 +104,6 @@ app.post("/forgotPassword", userRoutes);
 app.post("/saveOrder", orderRoutes);
 app.post("/checkout", cartRoutes);
 
-// Route to handle forgot password request
-// app.post("/forgotpassword", async (req, res) => {
-//   const { email, newPassword } = req.body;
-
-//   try {
-//     const temp = await collection.find();
-//     console.log(temp);
-
-//     const user = await collection.find({ email }).limit(1);
-
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-
-//     user.password = newPassword;
-//     await user.save();
-
-//     res.status(200).json({ message: "Password updated successfully" });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Internal server error" });
-//   }
-// });
-
-// Route related to form element
-// app.post("/checkout", async (req, res) => {
-// res.render("orderPlaced");
-//   try {
-//     const { dataField } = req.body;
-//     const items = JSON.parse(dataField); // Parse the JSON string to extract the items array
-//     console.log(items);
-
-//     userOrder = items;
-//     console.log("Your order is: ");
-//     console.log(userOrder);
-//     // sendEmail1();
-
-//     // Save the order with the extracted items
-//     const order = new Order({ items });
-//     await order.save();
-
-//     // Send a response to the client
-//     res.redirect("orderPlaced");
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// });
 
 app.get("*", (req, res) => {
   res.status(404).render("error");

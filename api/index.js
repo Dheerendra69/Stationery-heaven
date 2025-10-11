@@ -104,6 +104,9 @@ app.post("/forgotPassword", userRoutes);
 app.post("/saveOrder", orderRoutes);
 app.post("/checkout", cartRoutes);
 
+app.get("/api/wake-up", (req, res) => {
+  res.status(200).send("Backend awake and running!");
+});
 
 app.get("*", (req, res) => {
   res.status(404).render("error");

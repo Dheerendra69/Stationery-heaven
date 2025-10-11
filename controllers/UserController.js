@@ -3,7 +3,7 @@ const loginController = async (req, res) => {
   try {
     const { name, password } = req.body;
     const check = await UserDB.findOne({ name: name });
-    if (check.password == password) {
+    if (check && check.password == password) {
       res.status(201).render("index", { naming: `${name}` });
     } else {
       res.send("Incorrect password");

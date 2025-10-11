@@ -23,6 +23,11 @@ app.set("view engine", "hbs");
 app.set("views", publicPath);
 hbs.registerPartials(path.join(__dirname, "..", "public/partials"));
 
+// Cold start wake-up API
+app.get("/api/wake-up", (req, res) => {
+  res.status(200).send("Backend awake and running!");
+});
+
 app.get("/", (req, res) => {
   res.render("login");
 });
@@ -103,10 +108,6 @@ app.post("/register", userRoutes);
 app.post("/forgotPassword", userRoutes);
 app.post("/saveOrder", orderRoutes);
 app.post("/checkout", cartRoutes);
-
-app.get("/api/wake-up", (req, res) => {
-  res.status(200).send("Backend awake and running!");
-});
 
 app.get("*", (req, res) => {
   res.status(404).render("error");

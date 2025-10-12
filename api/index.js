@@ -5,7 +5,16 @@ const hbs = require("hbs");
 const userRoutes = require("../routes/userRoutes.js");
 const orderRoutes = require("../routes/orderRoutes.js");
 const cartRoutes = require("../routes/cartRoutes.js");
+const origins = require("../config/origins.js");
 const app = express();
+
+const cors = require("cors");
+app.use(
+  cors({
+    origin: origins,
+    credentials: true,
+  })
+);
 
 // connecting mongoDB
 const connectDB = require("../config/db.js");

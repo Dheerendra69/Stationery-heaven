@@ -1,5 +1,5 @@
 {
-  "name": "shoppingcart-copy-4",
+  "name": "staionery-heaven",
   "version": "1.0.0",
   "description": "",
   "main": "api/index.js",
@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^4.19.2",
     "express-handlebars": "^8.0.3",

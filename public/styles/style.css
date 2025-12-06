@@ -17,7 +17,6 @@ button {
 }
 .container {
   width: 900px;
-  /* margin: auto; */
   max-width: 90vw;
   text-align: center;
   padding-top: 10px;
@@ -51,8 +50,8 @@ header {
   margin-top: 15px;
   margin-bottom: 10px;
 }
-/* cartTab */
 
+/* cartTab */
 .cartTab {
   width: 400px;
   max-width: 100%;
@@ -62,8 +61,8 @@ header {
   top: 0;
   right: 0;
   bottom: 0;
-  display: grid; /* to divide into rows for inner elements */
-  grid-template-rows: 70px 1fr 70px; /* two rows of 70px width each */
+  display: grid; 
+  grid-template-rows: 70px 1fr 70px; 
 }
 
 .cartTab h1 {
@@ -73,7 +72,7 @@ header {
 }
 .cartTab .btn {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* two buttons of equal size */
+  grid-template-columns: repeat(2, 1fr); 
 }
 .cartTab .btn button {
   background-color: #e8bc0e;
@@ -96,11 +95,9 @@ header {
   transition: 0.5s;
 }
 body.activeTabCart .cartTab {
-  /* when the body will have an activeTabCart class I will set the right to 0px */
   right: 0;
 }
 body.activeTabCart .container {
-  /* contents of container will be pushed 250px to the left */
   transform: translateX(-250px);
 }
 
@@ -138,7 +135,6 @@ body.activeTabCart .container {
 }
 
 /* list cart item  */
-
 .listCart .item img {
   width: 100%;
 }
@@ -167,15 +163,12 @@ body.activeTabCart .container {
   color: #eee;
   cursor: auto;
 }
-/* .listCart .quantity{
-    display: flex;
-} */
+
 .listCart .item:nth-child(even) {
   background-color: #eee1;
 }
 
 /* detail page */
-
 .detail {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -252,7 +245,6 @@ body.activeTabCart .container {
   font-weight: 300;
 }
 
-
 @media only screen and (max-width: 992px) {
   .listProduct {
     grid-template-columns: repeat(3, 1fr);
@@ -286,5 +278,3 @@ body.activeTabCart .container {
     justify-content: center;
   }
 }
-
-

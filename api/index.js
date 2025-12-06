@@ -70,10 +70,6 @@ app.get("/detail", (req, res) => {
   res.render("detail");
 });
 
-app.get("/success", (req, res) => {
-  res.render("successMessage");
-});
-
 app.get("/guest-check-out", (req, res) => {
   res.render("guestCheckOut");
 });

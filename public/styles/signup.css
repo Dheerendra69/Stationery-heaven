@@ -182,7 +182,6 @@ form .sub:active {
   box-shadow: 0 5px 15px rgba(150, 167, 141, 0.35);
 }
 
-/* Tablet and above - show buttons in a row */
 @media (min-width: 600px) {
   .button-container {
     flex-direction: row;
@@ -218,7 +217,6 @@ form .sub:active {
   }
 }
 
-/* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

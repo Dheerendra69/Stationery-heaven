@@ -3,11 +3,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stationary Heaven</title>
-    <link rel="stylesheet" href="./styles/signup.css" />
+    <title>Stationery-Heaven</title>
+    <link rel="stylesheet" href="/styles/signup.css" />
     <link rel="icon" type="image/jpeg" href="images/Logo.jpeg" />
+    <link rel="stylesheet" href="/styles/notification.css" />
   </head>
   <body>
+    <div id="notification-container"></div>
     <div class="container">
 
       <form action="/signup" method="post">
@@ -25,9 +27,11 @@
         <div class="button-container">
           <a href="/login" class="btn">login page</a>
           <a href="/index" class="btn">home page</a>
+          <a href="/guest-check-out" class="btn">Guest Shopping</a>
         </div>
       </form>
     </div>
-
+    <script src="./js/signup.js"></script>
+    <script src="./js/notification.js"></script>
   </body>
 </html>

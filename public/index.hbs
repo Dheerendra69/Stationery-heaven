@@ -2,13 +2,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stationary Heaven</title>
+    <title>Stationery-Heaven</title>
     <link rel="icon" type="image/jpeg" href="images/Logo.jpeg" />
-    <link rel="stylesheet" href="./styles/style.css" />
-    <link rel="stylesheet" href="./styles/home.css" />
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="stylesheet" href="/styles/home.css" />
+
     <script type="module" src="./js/index.js"></script>
     <script type="module" src="./js/cart.js"></script>
+    <script type="module" src="./js/logout.js" defer></script>
   </head>
   <body>
     <h3 style="text-align: center;">Hello
@@ -23,6 +24,11 @@
         Contents of index file
       </div>
     </div>
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+    <script>
+      const username = localStorage.getItem("username") || "Guest"; 
+      const welcomeH3 = document.querySelector("h3"); 
+      welcomeH3.textContent = `Hello ${username}, Welcome to LPU's largest study-chain`;
+    </script>
   </body>
 </html>

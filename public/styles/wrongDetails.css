@@ -1,34 +1,33 @@
 body {
-    font-family: 'Pacifico', cursive;
-    display: flex; /* Center content vertically */
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Set body height to viewport height */
-    margin: 0;
-    background-color: #556E53;
-  }
-  
-  #message {
-    text-align: center;
-  }
-  
-  h1 {
-    font-size: 3em;
-  }
-  
-  #loginButton {
-    background-color: #9BB8CD;
-    color: #152A38;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-  }
-  
-  #loginButton:hover {
-    background-color: #152A38;
-    color: #9BB8CD;
-    transform: scale(1.025); /* Scale button on hover */
-  }
-  
+  font-family: "Pacifico", cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #556e53;
+}
+
+#message {
+  text-align: center;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+#loginButton {
+  background-color: #9bb8cd;
+  color: #152a38;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+#loginButton:hover {
+  background-color: #152a38;
+  color: #9bb8cd;
+  transform: scale(1.025);
+}

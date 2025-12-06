@@ -2,6 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { saveCart } = require("../controllers/CartController");
 
-router.post("/checkout", saveCart);
+router.post("/check-out", saveCart);
 
 module.exports = router;

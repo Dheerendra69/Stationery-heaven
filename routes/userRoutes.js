@@ -9,5 +9,5 @@ const router = express.Router();
 router.post("/login", loginController);
 router.post("/signup", signupController);
 router.post("/register", signupController);
-router.post("/forgotPassword", forgotPasswordController);
+router.post("/forgot-password", forgotPasswordController);
 module.exports = router;

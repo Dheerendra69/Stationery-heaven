@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const loginController = async (req, res) => {
   try {
     const { name, password } = req.body;
+    console.log("req.body: ", req.body);
 
     const query = name.includes("@")
       ? { email: name }

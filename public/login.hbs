@@ -3,15 +3,17 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stationary Heaven</title>
+    <title>Stationery-Heaven</title>
     <link rel="icon" type="image/jpeg" href="images/Logo.jpeg" />
-    <link rel="stylesheet" href="./styles/login.css" />
+    <link rel="stylesheet" href="/styles/login.css" />
+    <link rel="stylesheet" href="/styles/notification.css" />
   </head>
   <body>
+    <div id="notification-container"></div>
     <div class="container">
       <h1 class="heading">Login Form</h1>
       <form action="/login" method="post">
-        <label for="name">Enter name: </label>
+        <label for="name">Enter name or email: </label>
         <input placeholder="name" name="name" type="text" />
         <br />
         <label for="password">Enter password: </label>
@@ -21,11 +23,13 @@
         <a href="/signup">Dont have an account ?</a>
       </form>
       <div class="button-container">
-        <a href="forgotPassword"><button class="btn">Forgot Password</button></a>
-        <a href="/index"><button class="btn">go to home page</button></a>
+        <a href="/forgot-password"><button class="btn">Forgot Password</button></a>
+        <a href="/index"><button class="btn">Go To Home Page</button></a>
+        <a href="/guest-check-out"><button class="btn">Guest Shopping</button></a>
       </div>
       <br />
     </div>
-
+    <script src="./js/login.js"></script>
+    <script src="./js/notification.js"></script>
   </body>
 </html>

@@ -131,7 +131,7 @@ const cart = () => {
         shop: "lpu30block",
       };
 
-      fetch("/checkout", {
+      fetch("/check-out", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

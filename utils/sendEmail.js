@@ -11,7 +11,7 @@ const sendEmail = async (to, subject, message) => {
     });
 
     const mailOptions = {
-      from: `"ScribbleLand" <${process.env.EMAIL_USER}>`,
+      from: `"Stationery-Heaven" <${process.env.EMAIL_USER}>`,
       to,
       subject,
       text: message,

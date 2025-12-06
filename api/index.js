@@ -70,15 +70,15 @@ app.get("/detail", (req, res) => {
   res.render("detail");
 });
 
-app.get("/orderPlaced", (req, res) => {
-  res.render("orderPlaced");
+app.get("/success", (req, res) => {
+  res.render("successMessage");
 });
 
-app.get("/placeOrder", (req, res) => {
-  res.render("placeOrder");
+app.get("/guest-check-out", (req, res) => {
+  res.render("guestCheckOut");
 });
 
-app.get("/setNewPassword", (req, res) => {
+app.get("/set-new-password", (req, res) => {
   res.render("setNewPassword");
 });
 
@@ -86,36 +86,36 @@ app.get("/home", (req, res) => {
   res.render("home");
 });
 
-app.get("/labManual", (req, res) => {
+app.get("/products/lab-manual", (req, res) => {
   // res.render("labManual", {
   //   layout: "layouts/main",
   //   title: "Lab Manual Page",
   // });
-  res.render("labManual");
+  res.render("productsLabManual");
 });
 
-app.get("/productsBiotech", (req, res) => {
+app.get("/products/bio-technology", (req, res) => {
   res.render("productsBiotech");
 });
 
-app.get("/productsMec", (req, res) => {
+app.get("/products/mechanical", (req, res) => {
   res.render("productsMec");
 });
 
-app.get("/productsElec", (req, res) => {
+app.get("/products/electrical", (req, res) => {
   res.render("productsElec");
 });
 
-app.get("/forgotPassword", (req, res) => {
+app.get("/forgot-password", (req, res) => {
   res.render("forgotPassword");
 });
 
 app.post("/login", userRoutes);
 app.post("/signup", userRoutes);
 app.post("/register", userRoutes);
-app.post("/forgotPassword", userRoutes);
-app.post("/saveOrder", orderRoutes);
-app.post("/checkout", cartRoutes);
+app.post("/forgot-password", userRoutes);
+app.post("/save-order", orderRoutes);
+app.post("/check-out", cartRoutes);
 app.post("/send-mail", mailRoutes);
 
 app.get("*", (req, res) => {

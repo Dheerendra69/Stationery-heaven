@@ -18,7 +18,7 @@ form.addEventListener("submit", async (e) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-
+    console.log("res: ", res);
     if (res.ok) {
       const result = await res.json();
       localStorage.setItem("token", result.token);

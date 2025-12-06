@@ -22,7 +22,7 @@ form.addEventListener("submit", async (e) => {
       localStorage.setItem("token", result.token);
       localStorage.setItem("username", result.name);
       showNotification("Login successful!", "success"); 
-      setTimeout(() => window.location.href = "/index", 1000); 
+      setTimeout(() => window.location.href = "/index", 0); 
     } else {
       const err = await res.text();
       showNotification(err, "error"); 

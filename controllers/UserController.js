@@ -61,7 +61,7 @@ const forgotPasswordController = async (req, res) => {
   const { email, newPassword } = req.body;
 
   try {
-    const user = await UserDB.find({ email }).limit(1);
+    const user = await UserDB.findOne({ email });
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -72,7 +72,7 @@ const forgotPasswordController = async (req, res) => {
 
     res.status(200).json({ message: "Password updated successfully" });
   } catch (error) {
-    console.error(error);
+    console.error("Forgot Password Error:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };

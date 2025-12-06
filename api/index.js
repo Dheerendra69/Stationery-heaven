@@ -78,10 +78,6 @@ app.get("/guest-check-out", (req, res) => {
   res.render("guestCheckOut");
 });
 
-app.get("/set-new-password", (req, res) => {
-  res.render("setNewPassword");
-});
-
 app.get("/home", (req, res) => {
   res.render("home");
 });

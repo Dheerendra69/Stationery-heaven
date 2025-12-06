@@ -56,7 +56,7 @@ verifyForm.addEventListener("submit", async (e) => {
   }
 
   try {
-    const res = await fetch("/forgotPassword", {
+    const res = await fetch("/forgot-password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: userEmail, newPassword }),

@@ -1,10 +1,10 @@
 const UserDB = require("../models/User.js");
 const jwt = require("jsonwebtoken");
+const { sendEmail } = require("../utils/sendEmail.js");
 
 const loginController = async (req, res) => {
   try {
     const { name, password } = req.body;
-    console.log("req.body: ", req.body);
 
     const query = name.includes("@")
       ? { email: name }
@@ -47,6 +47,8 @@ const signupController = async (req, res) => {
     const token = jwt.sign({ id: result.insertedId, name }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
+
+    sendEmail(email, "Welcome to Stationary Heaven!!!", "Welcome to Stationery Heaven.");
 
     res.status(201).json({ message: "Signup successful", token, name });
   } catch (e) {

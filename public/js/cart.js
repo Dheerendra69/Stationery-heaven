@@ -1,4 +1,5 @@
 import products from "./products.js";
+const STATIONERY_HEAVEN = "stationery-heaven-inventory";
 let cartData;
 let x;
 const cart = () => {
@@ -126,15 +127,15 @@ const cart = () => {
 
       const orderPayload = {
         items: shoppingCart,
-        customerName: "anonymous",
-        gmail: "anonymous@gmail.com",
-        shop: "lpu30block",
+        shop: STATIONERY_HEAVEN,
       };
+      const token = localStorage.getItem("token");
 
       fetch("/check-out", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization" : `Bearer ${token}`,
         },
         body: JSON.stringify(orderPayload),
       })

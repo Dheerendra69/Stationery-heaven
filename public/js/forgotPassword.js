@@ -23,7 +23,7 @@ forgotForm.addEventListener("submit", async (e) => {
   `;
 
   try {
-    const res = await fetch("/sendMail", {
+    const res = await fetch("/send-mail", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ receiver: email, message }),

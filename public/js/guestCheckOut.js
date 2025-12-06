@@ -1,5 +1,5 @@
 document
-  .getElementById("order-form")
+  .getElementById("placeorder-form")
   .addEventListener("submit", function (event) {
     event.preventDefault();
     const formData = new FormData(this);
@@ -7,16 +7,16 @@ document
     formData.forEach((value, key) => {
       jsonData[key] = value;
     });
-    fetch("/saveOrder", {
+    fetch("/save-order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         orderId: document.getElementById("orderId").value,
-        customerName: document.getElementById("customerName").value,
-        orderDate: document.getElementById("orderDate").value,
-        gmail: document.getElementById("gmail").value,
+        customerName: document.getElementById("name").value,
+        deliveryDate: document.getElementById("delivery-date").value,
+        gmail: document.getElementById("email").value,
         items: getItemsData(),
         shop: document.getElementById("shop").value,
       }),
@@ -30,9 +30,9 @@ document
       })
       .then(() => {
         window.alert("Order placed successfully");
-        setTimeout(() => {
-          window.location.href = "/home";
-        }, 1000);
+        // setTimeout(() => {
+        //   window.location.href = "/home";
+        // }, 1000);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -158,7 +158,7 @@ window.onload = function () {
   const yyyy = today.getFullYear();
 
   const formattedDate = yyyy + "-" + mm + "-" + dd;
-  document.getElementById("orderDate").value = formattedDate;
+  document.getElementById("delivery-date").value = formattedDate;
 
   // Generating the order ID
   const randomOrderId = Math.floor(100000 + Math.random() * 900000);

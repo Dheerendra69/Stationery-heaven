@@ -1,4 +1,4 @@
-function showNotification(message, type = "info", duration = 3000) {
+export function showNotification(message, type = "info", duration = 3000) {
   const container = document.getElementById("notification-container");
   if (!container) return;
 

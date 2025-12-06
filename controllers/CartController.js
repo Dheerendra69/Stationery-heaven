@@ -1,17 +1,23 @@
 const cartOrderDB = require("../models/cartOrder");
+const { sendEmail } = require("../utils/sendEmail");
 
 const saveCart = async (req, res) => {
   try {
-    const { items, customerName, gmail, shop } = req.body;
+    const { items, shop } = req.body;
+    const { name, email } = req.user;
 
     const newOrder = new cartOrderDB({
       orderId: "ORD" + Math.floor(Math.random() * 1000000),
-      customerName,
+      customerName: name,
       orderDate: new Date(),
-      gmail,
+      gmail: email,
       items,
       shop,
     });
+
+    sendEmail(email, "Order Successful", "You have succesfully made an order.");
+
+    sendEmail(process.env.ADMIN_EMAIL, "A new order has been made", "An order has been from the website.");
 
     await newOrder.save();
 

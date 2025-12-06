@@ -8,7 +8,6 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const formData = new FormData(form);
   const data = Object.fromEntries(formData.entries());
-  console.log("here");
 
   const url = window.location.pathname === "/login" || window.location.pathname === "/" ? "/login" : "/signup";
 
@@ -18,7 +17,6 @@ form.addEventListener("submit", async (e) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    console.log("res: ", res);
     if (res.ok) {
       const result = await res.json();
       localStorage.setItem("token", result.token);

@@ -16,17 +16,14 @@ const loadTemplate = () => {
       contentTab.innerHTML = temporaryContent.innerHTML;
       temporaryContent.innerHTML = null;
 
-      //
       cart(); // to perform functions related to shopping cart
       initApp(); // to perform functions related to the current page
-      printlistCartItems();
     });
 };
 loadTemplate();
 
 const initApp = () => {
   // load list product
-  // console.log(products);
   let listProductHTML = document.querySelector(".listProduct"); // this is where all the product data will be pushed
   listProductHTML.innerHTML = null; // setting its content to null
 
@@ -47,26 +44,9 @@ const initApp = () => {
   });
 };
 
-function printProductDetails(productId) {
-  const product = products.find((item) => item.id === productId);
-  if (product) {
-    console.log(`Product ID: ${product.id}`);
-    console.log(`Product Name: ${product.name}`);
-    console.log(`Product Price: Rs.${product.price}`);
-    console.log(`Product Image: ${product.image}`);
-    console.log(`Product Description: ${product.description}`);
-  } else {
-    console.log(`Product with ID ${productId} not found.`);
+window.addEventListener("DOMContentLoaded", () => {
+  if (sessionStorage.getItem("showSignupSuccess")) {
+    showNotification("Signup successful!", "success");
+    sessionStorage.removeItem("showSignupSuccess");
   }
-}
-
-function printlistCartItems() {
-  let addCartItems = document.querySelectorAll(".listCart");
-  console.log("printing list cart items");
-  addCartItems.forEach((item) => {
-    let productId = item.dataset.id;
-    printProductDetails(productId); // Call the function directly
-  });
-}
-
-// --------
+});

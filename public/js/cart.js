@@ -31,15 +31,10 @@ const cart = () => {
     cartData = JSON.stringify(shoppingCart);
     x = JSON.parse(cartData);
     cartData = x;
-    console.log(cartData.length);
-    console.log(cartData);
     const totalPrice = cartData.reduce((total, cartItem) => {
       return total + calculateTotalPrice(cartItem);
     }, 0);
 
-    console.log("Total Price:", totalPrice);
-
-    // ----
     // Fetch product details for each item in cartData
     const cartItemsWithDetails = cartData.map((cartItem) => {
       const product = getProductDetails(cartItem.product_id);
@@ -77,8 +72,6 @@ const cart = () => {
     let totalHTML = document.querySelector(".icon-cart span");
     let totalQuantity = 0;
     listHTML.innerHTML = null;
-    console.log("shopping Cart: ");
-    console.log(shoppingCart);
     shoppingCart.forEach((item) => {
       totalQuantity = totalQuantity + item.quantity;
       let position = products.findIndex((value) => value.id == item.product_id);
@@ -121,7 +114,6 @@ const cart = () => {
       quantity--;
       setProductInCart(idProduct, quantity, position);
     } else if (buttonClick.classList.contains("checkOut")) {
-      console.log("checkout button clicked");
 
       const cartData = localStorage.getItem("cart");
 

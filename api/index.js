@@ -7,6 +7,7 @@ const orderRoutes = require("../routes/orderRoutes.js");
 const cartRoutes = require("../routes/cartRoutes.js");
 const app = express();
 const cors = require('cors');
+const PORT = process.env.PORT || 3000;
 app.use(cors({
   origin: "*", 
   credentials: true
@@ -118,6 +119,6 @@ app.get("*", (req, res) => {
   res.status(404).render("error");
 });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log("App running on port number 3000");
 });

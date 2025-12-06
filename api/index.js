@@ -5,11 +5,13 @@ const hbs = require("hbs");
 const userRoutes = require("../routes/userRoutes.js");
 const orderRoutes = require("../routes/orderRoutes.js");
 const cartRoutes = require("../routes/cartRoutes.js");
+const mailRoutes = require("../routes/mailRoutes.js");
+const allowedOrigins = require("../config/origins.js");
 const app = express();
 const cors = require('cors');
 const PORT = process.env.PORT || 3000;
 app.use(cors({
-  origin: "*", 
+  origin: [ allowedOrigins ], 
   credentials: true
 }));
 
@@ -114,6 +116,7 @@ app.post("/register", userRoutes);
 app.post("/forgotPassword", userRoutes);
 app.post("/saveOrder", orderRoutes);
 app.post("/checkout", cartRoutes);
+app.post("/send-mail", mailRoutes);
 
 app.get("*", (req, res) => {
   res.status(404).render("error");

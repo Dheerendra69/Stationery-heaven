@@ -11,7 +11,7 @@ const CartOrderSchema = new mongoose.Schema({
   gmail: { type: String, required: true },
   orderDate: { type: Date, required: true },
   shop: { type: String, required: true },
-  items: [CartItemSchema], // array of { product_id, quantity }
+  items: [CartItemSchema], 
 });
 
 const CartOrder = mongoose.model("cartOrder", CartOrderSchema);

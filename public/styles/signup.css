@@ -1,9 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   margin: 0;
-  padding: 0;
+  padding: 20px;
   background: linear-gradient(135deg, #d9e9cf, #b6ceb4);
   display: flex;
   align-items: center;
@@ -12,9 +18,15 @@ body {
   color: #2c3e50;
 }
 
+.container {
+  width: 100%;
+  max-width: 480px;
+  padding: 0 20px;
+}
+
 h1 {
   text-align: center;
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   color: #4a5d42;
   margin-bottom: 25px;
   letter-spacing: 0.5px;
@@ -23,12 +35,11 @@ h1 {
 form {
   display: flex;
   flex-direction: column;
-  align-items: center;
   background-color: #f0f0f0;
-  border-radius: 16px;
+  border-radius: 20px;
   box-shadow: 0 10px 25px rgba(150, 167, 141, 0.3);
-  padding: 45px 35px;
-  width: 400px;
+  padding: clamp(30px, 5vw, 50px) clamp(25px, 4vw, 40px);
+  width: 100%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -37,13 +48,23 @@ form:hover {
   box-shadow: 0 15px 30px rgba(150, 167, 141, 0.4);
 }
 
+form label {
+  align-self: flex-start;
+  margin-bottom: 8px;
+  margin-left: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #4a5d42;
+}
+
 form input {
-  padding: 12px;
+  padding: 14px 16px;
   border: 1.5px solid #b6ceb4;
-  border-radius: 10px;
-  margin-bottom: 18px;
-  width: 80%;
-  font-size: 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  width: 100%;
+  font-size: clamp(14px, 2vw, 15px);
+  font-family: inherit;
   background-color: #ffffff;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -51,107 +72,159 @@ form input {
 form input:focus {
   outline: none;
   border-color: #96a78d;
-  box-shadow: 0 0 6px rgba(150, 167, 141, 0.5);
+  box-shadow: 0 0 8px rgba(150, 167, 141, 0.5);
 }
 
 form .sub {
-  background-color: #96a78d;
+  background: linear-gradient(135deg, #96a78d, #7f957a);
   color: #ffffff;
-  padding: 12px 28px;
+  padding: 16px 28px;
   border: none;
-  border-radius: 8px;
+  border-radius: 14px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  font-family: inherit;
+  width: 100%;
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 6px 20px rgba(150, 167, 141, 0.35);
+  letter-spacing: 0.3px;
+}
+
+form .sub::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+form .sub:hover::before {
+  width: 350px;
+  height: 350px;
 }
 
 form .sub:hover {
-  background-color: #4a5d42;
-  transform: scale(1.03);
+  background: linear-gradient(135deg, #7f957a, #4a5d42);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(74, 93, 66, 0.45);
 }
 
-a {
-  display: block;
-  text-align: center;
-  margin-top: 15px;
-  color: #4a5d42;
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: #96a78d;
+form .sub:active {
+  transform: translateY(-1px) scale(0.99);
+  box-shadow: 0 6px 18px rgba(74, 93, 66, 0.35);
 }
 
 .button-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 25px;
+  flex-direction: column;
   gap: 12px;
+  margin-top: 25px;
+  width: 100%;
 }
 
 .btn {
-  background-color: #b6ceb4;
+  background: linear-gradient(135deg, #b6ceb4, #a8c4a0);
   color: #2c3e50;
   border: none;
-  border-radius: 8px;
-  padding: 12px 22px;
+  border-radius: 14px;
+  padding: 14px 22px;
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.3s ease;
+  font-size: clamp(0.9rem, 2vw, 0.95rem);
+  font-family: inherit;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(182, 206, 180, 0.35);
+  letter-spacing: 0.3px;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .btn:hover {
-  background-color: #96a78d;
+  background: linear-gradient(135deg, #96a78d, #7f957a);
   color: #fff;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(150, 167, 141, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(150, 167, 141, 0.45);
 }
 
 .btn:active {
-  transform: translateY(0);
-  box-shadow: none;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(150, 167, 141, 0.35);
 }
 
-@media (max-width: 480px) {
-  form {
-    width: 90%;
-    padding: 30px 20px;
+/* Tablet and above - show buttons in a row */
+@media (min-width: 600px) {
+  .button-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-
-  h1 {
-    font-size: 1.6rem;
-  }
-
-  form input {
-    width: 100%;
-  }
-
-  .btn,
-  .sub {
-    width: 100%;
+  
+  .btn {
+    flex: 1 1 auto;
+    min-width: 140px;
   }
 }
 
-@media (min-width: 481px) and (max-width: 768px) {
+/* Medium screens */
+@media (min-width: 768px) {
+  body {
+    padding: 40px;
+  }
+  
+  .container {
+    max-width: 520px;
+  }
+  
   form {
-    width: 80%;
-  }
-
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  form input {
-    width: 90%;
+    border-radius: 24px;
   }
 }
 
-@media (min-width: 769px) {
-  form {
-    width: 400px;
+/* Large screens */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 560px;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

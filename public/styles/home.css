@@ -130,7 +130,7 @@ img {
 }
 
 .nav__item {
-  width: 130px;
+  padding: 20px;
 }
 
 .nav__name {

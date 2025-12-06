@@ -14,6 +14,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  padding: 20px;
   position: relative;
   overflow-x: hidden;
 }
@@ -32,12 +33,9 @@ body::before {
 }
 
 @keyframes floating {
-
-  0%,
-  100% {
+  0%, 100% {
     transform: translate(0, 0);
   }
-
   50% {
     transform: translate(30px, 30px);
   }
@@ -53,12 +51,12 @@ body::before {
 .container {
   background: rgba(253, 253, 253, 0.95);
   backdrop-filter: blur(20px);
-  border-radius: 30px;
+  border-radius: 24px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15),
     0 0 0 1px rgba(255, 255, 255, 0.5) inset;
-  padding: 60px 50px;
-  width: 440px;
-  max-width: 90%;
+  padding: clamp(40px, 6vw, 60px) clamp(30px, 5vw, 50px);
+  width: 100%;
+  max-width: 500px;
   text-align: center;
   position: relative;
   z-index: 1;
@@ -72,7 +70,7 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 30px;
+  border-radius: 24px;
   padding: 2px;
   background: linear-gradient(135deg, rgba(150, 167, 141, 0.4), rgba(182, 206, 180, 0.2));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -83,7 +81,7 @@ body::before {
 }
 
 .container:hover {
-  transform: translateY(-12px) scale(1.02);
+  transform: translateY(-8px) scale(1.01);
   box-shadow: 0 30px 70px rgba(74, 93, 66, 0.25),
     0 0 0 1px rgba(255, 255, 255, 0.7) inset;
 }
@@ -93,12 +91,12 @@ body::before {
 }
 
 .heading {
-  font-size: 2.4rem;
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
   background: linear-gradient(135deg, #4a5d42, #7f957a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
   letter-spacing: 1px;
   font-weight: 700;
   position: relative;
@@ -110,7 +108,6 @@ body::before {
     opacity: 0;
     transform: translateY(-20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -132,28 +129,27 @@ body::before {
 form {
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
-  gap: 8px;
+  gap: 6px;
 }
 
 form label {
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
   color: #4a5d42;
   align-self: flex-start;
-  margin-left: 10%;
-  margin-top: 12px;
+  margin-left: 8px;
+  margin-top: 10px;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 form input {
-  padding: 16px 20px;
+  padding: clamp(14px, 2vw, 16px) clamp(16px, 3vw, 20px);
   border: 2px solid #e0ebe0;
-  border-radius: 15px;
-  margin-bottom: 18px;
-  width: 80%;
-  font-size: 15px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+  width: 100%;
+  font-size: clamp(14px, 2vw, 15px);
   font-family: inherit;
   background: linear-gradient(135deg, #ffffff, #fafcfa);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -186,13 +182,14 @@ form input:hover:not(:focus) {
 form .sub {
   background: linear-gradient(135deg, #96a78d, #7f957a);
   color: #ffffff;
-  padding: 16px 32px;
+  padding: clamp(14px, 2vw, 16px) 32px;
   border: none;
-  border-radius: 15px;
+  border-radius: 14px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 1.05rem;
-  width: 80%;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  font-family: inherit;
+  width: 100%;
   margin-top: 10px;
   position: relative;
   overflow: hidden;
@@ -231,9 +228,10 @@ form .sub:active {
 a {
   display: inline-block;
   text-align: center;
-  margin-top: 18px;
+  margin-top: 16px;
   color: #4a5d42;
   font-weight: 500;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
   text-decoration: none;
   position: relative;
   transition: all 0.3s ease;
@@ -260,25 +258,23 @@ a:hover::after {
 }
 
 .button-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  margin-top: 35px;
-  gap: 15px;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 30px;
+  gap: 12px;
+  width: 100%;
 }
 
 .btn {
   background: linear-gradient(135deg, #b6ceb4, #a8c4a0);
   color: #2c3e50;
   border: none;
-  border-radius: 15px;
-  padding: 14px 20px;
+  border-radius: 14px;
+  padding: clamp(12px, 2vw, 14px) 20px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
   font-family: inherit;
   position: relative;
   overflow: hidden;
@@ -308,7 +304,7 @@ a:hover::after {
 .btn:hover {
   background: linear-gradient(135deg, #96a78d, #7f957a);
   color: #ffffff;
-  transform: translateY(-5px);
+  transform: translateY(-4px);
   box-shadow: 0 10px 25px rgba(150, 167, 141, 0.4);
 }
 
@@ -317,76 +313,56 @@ a:hover::after {
   box-shadow: 0 5px 15px rgba(150, 167, 141, 0.3);
 }
 
-@media (max-width: 480px) {
-  .container {
-    width: 92%;
-    padding: 40px 30px;
-    border-radius: 25px;
+/* Tablet and above - show buttons in grid */
+@media (min-width: 600px) {
+  .button-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
   }
-
-  .heading {
-    font-size: 1.8rem;
-    margin-bottom: 25px;
-  }
-
-  form input,
-  form .sub {
-    width: 100%;
-    font-size: 14px;
-    padding: 14px 18px;
-  }
-
+  
   .btn {
     width: 100%;
-    max-width: 100%;
-    padding: 13px 24px;
-  }
-
-  .button-container {
-    flex-direction: column;
-    gap: 12px;
   }
 }
 
-@media (min-width: 481px) and (max-width: 768px) {
+/* Medium screens */
+@media (min-width: 768px) {
+  body {
+    padding: 40px;
+  }
+  
   .container {
-    width: 80%;
-    padding: 50px 40px;
+    max-width: 540px;
+    border-radius: 28px;
   }
-
-  .heading {
-    font-size: 2rem;
-  }
-
-  form input {
-    width: 90%;
+  
+  .container::before {
+    border-radius: 28px;
   }
 }
 
-@media (min-width: 769px) and (max-width: 1200px) {
+/* Large screens */
+@media (min-width: 1024px) {
   .container {
-    width: 460px;
-    padding: 60px 50px;
+    max-width: 580px;
+    border-radius: 30px;
   }
-
-  .heading {
-    font-size: 2.3rem;
+  
+  .container::before {
+    border-radius: 30px;
   }
 }
 
-@media (min-width: 1201px) {
+/* Extra large screens */
+@media (min-width: 1440px) {
   .container {
-    width: 440px;
-    padding: 60px 50px;
-  }
-
-  .heading {
-    font-size: 2.4rem;
+    max-width: 600px;
   }
 }
 
+/* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {

@@ -31,6 +31,6 @@ Stationary Heaven is a basic e-commerce web application built for selling statio
 
 ### 🚀 Live Demo
 
-- 🔵 Deployment (Render): [stationaryheaven-final.onrender.com](https://stationaryheaven-final.onrender.com)
+- 🔵 Deployment (Render): [stationery-heaven-v2.onrender.com](https://stationery-heaven-v2.onrender.com)
 
-Credits - https://youtu.be/gXWohFYrI0M?si=vo1QXOQxSJe0dZ7B 
+Thanks to - https://youtu.be/gXWohFYrI0M?si=vo1QXOQxSJe0dZ7B 

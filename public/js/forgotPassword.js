@@ -1,57 +1,76 @@
-const emailForm = document.getElementById("emailForm");
-const otpContainer = document.getElementById("otpContainer");
-const verifyButton = document.getElementById("verifyButton");
+const forgotForm = document.getElementById("forgot-form");
+const verifyForm = document.getElementById("verify-form");
 
-let x = 0; // variable to store OTP
+let userEmail = "";
+let generatedOTP = "";
 
-emailForm.addEventListener("submit", function (event) {
-  event.preventDefault(); // Prevent default form submission
-  alert("Instructions sent to your email!");
-  // Show OTP input container
-  otpContainer.style.display = "block";
-  sendEmail();
-});
+forgotForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-verifyButton.addEventListener("click", function () {
-  const enteredOTP = document.getElementById("otp").value;
+  const email = document.getElementById("email").value.trim();
+  if (!email) return showNotification("Please enter your email", "error");
 
-  // Simulate OTP verification (replace with actual verification logic)
-  if (enteredOTP == x) {
-    // Replace with your actual OTP validation logic
-    alert("OTP verified! You are being redirected to home page.");
-    setTimeout(() => {
-      window.location.href = "index.hbs";
-    }, 3000);
-    // Redirect to password reset page (replace with actual redirection logic)
-  } else {
-    alert("Invalid OTP. Please try again.");
-    // Refresh the page after 2 seconds
-    setTimeout(function () {
-      location.reload();
-    }, 2000);
+  userEmail = email;
+  generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+
+  const message = `
+    Dear user,
+    \nYour OTP for password reset is: ${generatedOTP}
+    \nPlease use this code to reset your password.
+    \nIf you didn't request this, please ignore this email.
+    \n\nRegards,
+    \nStationery Heaven Team
+  `;
+
+  try {
+    const res = await fetch("/sendMail", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ receiver: email, message }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      showNotification("OTP sent to your email!", "success");
+      forgotForm.style.display = "none";
+      verifyForm.style.display = "block";
+    } else {
+      showNotification(data.message || "Failed to send OTP", "error");
+    }
+  } catch (error) {
+    console.error(error);
+    showNotification("Something went wrong while sending OTP", "error");
   }
 });
 
-function sendEmail() {
-  var recipientEmail = document.getElementById("email").value; // Get the value of email input
-  x = generateRandomSixDigitNumber();
-  Email.send({
-    Host: "smtp.elasticemail.com",
-    Username: "dheerendrapratapsingh1509@gmail.com",
-    Password: "ECF23215F819034DB816FBC02BB5CCC245A9",
-    To: recipientEmail, // Use the recipientEmail variable here
-    From: "dheerendrapratapsingh1509@gmail.com",
-    Subject: "Your OTP", // Change this subject as per your requirement
-    Body: `Your OTP is: ${x}`, // Change the body as per your requirement
-  }).then((message) => alert(message));
-}
+verifyForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-function generateRandomSixDigitNumber() {
-  // to generate OTP
-  // Generate a random number between 100000 and 999999 (inclusive)
-  const randomNumber =
-    Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
+  const otp = document.getElementById("otp").value.trim();
+  const newPassword = document.getElementById("newPassword").value.trim();
 
-  // Convert the number to a string and return it
-  return randomNumber.toString();
-}
+  if (otp !== generatedOTP) {
+    showNotification("Invalid OTP. Please check again.", "error");
+    return;
+  }
+
+  try {
+    const res = await fetch("/forgotPassword", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: userEmail, newPassword }),
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      showNotification("Password updated successfully!", "success");
+      setTimeout(() => (window.location.href = "/login"), 2000);
+    } else {
+      showNotification(data.message || "Failed to update password", "error");
+    }
+  } catch (error) {
+    console.error(error);
+    showNotification("Something went wrong", "error");
+  }
+});

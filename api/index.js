@@ -107,6 +107,8 @@ app.post("/signup", userRoutes);
 app.post("/register", userRoutes);
 app.post("/forgot-password", userRoutes);
 app.post("/save-order", orderRoutes);
+app.get("/orders", orderRoutes);
+app.get("/order/:orderId", orderRoutes);
 app.post("/check-out", cartRoutes);
 app.post("/send-mail", mailRoutes);
 

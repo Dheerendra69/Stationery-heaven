@@ -10,7 +10,7 @@ const mailController =  async (req, res) => {
 
     const subject = "Message from Your App";
 
-    sendEmail(receiver, subject, message);
+    // await sendEmail(receiver, subject, message);
 
     res.status(200).json({ success: true, message: "Email sent successfully!" });
   } catch (error) {

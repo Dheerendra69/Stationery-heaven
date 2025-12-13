@@ -1147,23 +1147,6 @@ h1::after {
   animation: fadeInUp 0.6s ease-out;
 }
 
-.placeorder-form::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 24px;
-  padding: 2px;
-  background: linear-gradient(135deg, rgba(150, 167, 141, 0.4), rgba(182, 206, 180, 0.2));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
 .placeorder-form:hover {
   transform: translateY(-5px);
   box-shadow: 0 25px 70px rgba(74, 93, 66, 0.2),
@@ -1197,7 +1180,9 @@ h1::after {
 .placeorder-form input[type="text"],
 .placeorder-form input[type="date"],
 .placeorder-form input[type="email"],
+.placeorder-form input[type="tel"],
 .placeorder-form input[type="number"],
+.placeorder-form textarea,
 .placeorder-form select {
   width: 100%;
   padding: clamp(12px, 2vw, 14px) clamp(14px, 2.5vw, 18px);
@@ -1211,17 +1196,26 @@ h1::after {
   color: #2c3e50;
 }
 
+.placeorder-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
 .placeorder-form input[type="text"]::placeholder,
-.placeorder-form input[type="email"]::placeholder {
+.placeorder-form input[type="email"]::placeholder,
+.placeorder-form input[type="tel"]::placeholder,
+.placeorder-form textarea::placeholder {
   color: #b0bfb0;
   transition: opacity 0.3s ease;
 }
 
-.placeorder-form input:focus::placeholder {
+.placeorder-form input:focus::placeholder,
+.placeorder-form textarea:focus::placeholder {
   opacity: 0.5;
 }
 
 .placeorder-form input:focus,
+.placeorder-form textarea:focus,
 .placeorder-form select:focus {
   outline: none;
   border-color: #7f957a;
@@ -1232,6 +1226,7 @@ h1::after {
 }
 
 .placeorder-form input:hover:not(:focus),
+.placeorder-form textarea:hover:not(:focus),
 .placeorder-form select:hover:not(:focus) {
   border-color: #c1d5c1;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -1243,16 +1238,22 @@ h1::after {
   cursor: not-allowed;
 }
 
+#items-list {
+  margin-bottom: clamp(15px, 2vw, 20px);
+}
+
 .placeorder-items-container {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2fr 1fr auto;
   gap: clamp(12px, 2vw, 16px);
+  align-items: end;
   padding: clamp(15px, 2vw, 20px);
   margin-bottom: clamp(15px, 2vw, 20px);
   border: 2px solid #e0ebe0;
   border-radius: 16px;
   background: linear-gradient(135deg, #fafcfa, #ffffff);
   transition: all 0.3s ease;
+  animation: slideIn 0.4s ease-out;
 }
 
 .placeorder-items-container:hover {
@@ -1276,6 +1277,75 @@ h1::after {
   margin-bottom: 0;
 }
 
+.placeorder-item-actions {
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 2px;
+}
+
+.remove-item-btn {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.remove-item-btn:hover {
+  background: linear-gradient(135deg, #c0392b, #a93226);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 18px rgba(231, 76, 60, 0.4);
+}
+
+.remove-item-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.remove-item-btn i {
+  font-size: 1rem;
+}
+
+.add-item-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #27ae60, #229954);
+  border: none;
+  color: white;
+  padding: clamp(12px, 2vw, 14px) clamp(18px, 3vw, 24px);
+  text-align: center;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border-radius: 14px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
+  margin-bottom: clamp(20px, 3vw, 30px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.add-item-btn:hover {
+  background: linear-gradient(135deg, #229954, #1e8449);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(39, 174, 96, 0.4);
+}
+
+.add-item-btn:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.add-item-btn i {
+  font-size: 1rem;
+}
+
 .placeorder-summary {
   background: linear-gradient(135deg, #f0f5f0, #e8f0e8);
   border: 2px solid #b6ceb4;
@@ -1292,15 +1362,13 @@ h1::after {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-weight: 600;
 }
 
-.placeorder-total-amount {
-  font-weight: 700;
-  font-size: clamp(1.1rem, 2.2vw, 1.3rem) !important;
+.placeorder-summary span {
   color: #4a5d42;
-  padding-top: clamp(10px, 2vw, 15px);
-  margin-top: clamp(10px, 2vw, 15px) !important;
-  border-top: 2px solid #b6ceb4;
+  font-weight: 700;
+  font-size: clamp(1rem, 2.1vw, 1.15rem);
 }
 
 .placeorder-button-container {
@@ -1369,6 +1437,68 @@ h1::after {
 .placeorder-btn[type="reset"]:hover {
   background: linear-gradient(135deg, #96a78d, #7f957a);
   color: #ffffff;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .placeorder-items-container {
+    grid-template-columns: 1fr;
+    gap: clamp(10px, 2vw, 12px);
+  }
+
+  .placeorder-item-actions {
+    justify-content: center;
+    padding-bottom: 0;
+    padding-top: 10px;
+  }
+
+  .remove-item-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .placeorder-button-container {
+    flex-direction: column;
+  }
+
+  .placeorder-btn {
+    width: 100%;
+  }
 }
 
 /* animation and other responsiveness */

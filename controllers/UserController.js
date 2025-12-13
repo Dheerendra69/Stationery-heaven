@@ -48,8 +48,8 @@ const signupController = async (req, res) => {
       expiresIn: "1h",
     });
 
-    sendEmail(email, "Welcome to Stationary Heaven!!!", "Welcome to Stationery Heaven.");
-    sendEmail(process.env.ADMIN_MAIL, "A new user signed up!!!", "A new user signed up.");
+    // await sendEmail(email, "Welcome to Stationary Heaven!!!", "Welcome to Stationery Heaven.");
+    // await sendEmail(process.env.ADMIN_MAIL, "A new user signed up!!!", "A new user signed up.");
 
     res.status(201).json({ message: "Signup successful", token, name });
   } catch (e) {

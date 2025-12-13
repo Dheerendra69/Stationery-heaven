@@ -15,9 +15,9 @@ const saveCart = async (req, res) => {
       shop,
     });
 
-    sendEmail(email, "Order Successful", "You have succesfully made an order.");
+    // await sendEmail(email, "Order Successful", "You have succesfully made an order.");
 
-    sendEmail(process.env.ADMIN_EMAIL, "A new order has been made", "An order has been from the website.");
+    // await sendEmail(process.env.ADMIN_EMAIL, "A new order has been made", "An order has been from the website.");
 
     await newOrder.save();
 

@@ -1,183 +1,223 @@
-document
-  .getElementById("placeorder-form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
-    const formData = new FormData(this);
-    const jsonData = {};
-    formData.forEach((value, key) => {
-      jsonData[key] = value;
-    });
-    fetch("/save-order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        orderId: document.getElementById("orderId").value,
-        customerName: document.getElementById("name").value,
-        deliveryDate: document.getElementById("delivery-date").value,
-        gmail: document.getElementById("email").value,
-        items: getItemsData(),
-        shop: document.getElementById("shop").value,
-      }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("Order placed successfully");
-        } else {
-          console.error("Failed to place order");
-        }
-      })
-      .then(() => {
-        window.alert("Order placed successfully");
-        // setTimeout(() => {
-        //   window.location.href = "/home";
-        // }, 1000);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("orderId").value = generateRandomOrderId();
+  updateSummary();
+
+  const today = new Date().toISOString().split("T")[0];
+  document.getElementById("delivery-date").setAttribute("min", today);
+});
+
+document.getElementById("add-item-btn").addEventListener("click", function () {
+  const itemsList = document.getElementById("items-list");
+
+  const newItemRow = document.createElement("div");
+  newItemRow.className = "placeorder-items-container item-row";
+  newItemRow.setAttribute("data-item-index", itemIndex);
+
+  newItemRow.innerHTML = `
+    <div class="placeorder-item">
+      <label for="item-name-${itemIndex}">Item Name</label>
+      <input type="text" id="item-name-${itemIndex}" class="item-name" placeholder="Enter item name" required />
+    </div>
+    <div class="placeorder-item">
+      <label for="quantity-${itemIndex}">Quantity</label>
+      <input type="number" id="quantity-${itemIndex}" class="item-quantity" min="1" value="1" required />
+    </div>
+    <div class="placeorder-item-actions">
+      <button type="button" class="remove-item-btn" title="Remove Item">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+  `;
+
+  itemsList.appendChild(newItemRow);
+  itemIndex++;
+
+  attachItemEventListeners(newItemRow);
+  updateSummary();
+});
+
+function attachItemEventListeners(itemRow) {
+  const removeBtn = itemRow.querySelector(".remove-item-btn");
+  const quantityInput = itemRow.querySelector(".item-quantity");
+
+  removeBtn.addEventListener("click", function () {
+    removeItem(itemRow);
   });
+
+  quantityInput.addEventListener("input", function () {
+    updateSummary();
+  });
+}
+
+function removeItem(itemRow) {
+  const itemsList = document.getElementById("items-list");
+  const allItems = itemsList.querySelectorAll(".item-row");
+
+  if (allItems.length <= 1) {
+    alert("You must have at least one item in your order.");
+    return;
+  }
+
+  itemRow.remove();
+  updateSummary();
+}
+
+function updateSummary() {
+  const itemRows = document.querySelectorAll(".item-row");
+  let totalItems = itemRows.length;
+  let totalQuantity = 0;
+
+  itemRows.forEach((row) => {
+    const quantityInput = row.querySelector(".item-quantity");
+    const quantity = parseInt(quantityInput.value) || 0;
+    totalQuantity += quantity;
+  });
+
+  document.getElementById("total-items").textContent = totalItems;
+  document.getElementById("total-quantity").textContent = totalQuantity;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const initialItem = document.querySelector(".item-row");
+  if (initialItem) {
+    attachItemEventListeners(initialItem);
+  }
+});
 
 function getItemsData() {
   const itemsData = [];
-  const items = document.querySelectorAll(".item");
+  const itemRows = document.querySelectorAll(".item-row");
 
-  items.forEach((item) => {
-    const itemName = item.querySelector("select").value;
-    const itemQuantity = parseInt(
-      item.querySelector('input[type="number"]').value
-    );
-    itemsData.push({ itemName, quantity: itemQuantity });
+  itemRows.forEach((row) => {
+    const itemName = row.querySelector(".item-name").value.trim();
+    const itemQuantity = parseInt(row.querySelector(".item-quantity").value);
+
+    if (itemName && itemQuantity > 0) {
+      itemsData.push({
+        itemName: itemName,
+        quantity: itemQuantity,
+      });
+    }
   });
 
   return itemsData;
 }
 
 function generateRandomOrderId() {
-  return Math.floor(1000 + Math.random() * 9000);
-}
-function setOrderId() {
-  const orderIdInput = document.getElementById("orderId");
-  if (orderIdInput.value.trim() === "") {
-    const randomOrderId = generateRandomOrderId();
-    orderIdInput.value = "ORD" + randomOrderId;
-  }
+  const prefix = "ORD";
+  const randomNum = Math.floor(100000 + Math.random() * 900000);
+  return `${prefix}${randomNum}`;
 }
 
-window.addEventListener("load", setOrderId);
+document
+  .getElementById("placeorder-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
 
-const addItemButton = document.getElementById("add-item");
-const itemsContainer = document.getElementById("items-container");
-const orderForm = document.getElementById("order-form");
-const totalAmountSpan = document.getElementById("total-amount");
+    const items = getItemsData();
 
-const itemPrices = {
-  Printouts: 2,
-  Pens: 10,
-  Dusters: 15,
-  Markers: 20,
-  Notebooks: 30,
-  Diaries: 50,
-};
+    if (items.length === 0) {
+      alert("Please add at least one item with a valid name and quantity.");
+      return;
+    }
 
-let itemCount = 0;
+    const orderData = {
+      orderId: document.getElementById("orderId").value,
+      customerName: document.getElementById("name").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      address: document.getElementById("address").value.trim(),
+      deliveryDate: document.getElementById("delivery-date").value,
+      shop: document.getElementById("shop").value.trim(),
+      paymentMethod: document.getElementById("payment-method").value,
+      items: items,
+      orderDate: new Date().toISOString(),
+    };
 
-addItemButton.addEventListener("click", () => {
-  itemCount++;
+    fetch("/save-order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderData),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Failed to place order");
+        }
+      })
+      .then((data) => {
+        alert(
+          `Order placed successfully! Your Order ID is: ${orderData.orderId}`
+        );
 
-  const item = document.createElement("div");
-  item.classList.add("item");
+        document.getElementById("placeorder-form").reset();
+        document.getElementById("orderId").value = generateRandomOrderId();
 
-  const itemNameLabel = document.createElement("label");
-  itemNameLabel.textContent = "Item:";
-  itemNameLabel.hbsFor = `itemName-${itemCount}`;
+        const itemsList = document.getElementById("items-list");
+        itemsList.innerHTML = `
+      <div class="placeorder-items-container item-row" data-item-index="0">
+        <div class="placeorder-item">
+          <label for="item-name-0">Item Name</label>
+          <input type="text" id="item-name-0" class="item-name" placeholder="Enter item name" required />
+        </div>
+        <div class="placeorder-item">
+          <label for="quantity-0">Quantity</label>
+          <input type="number" id="quantity-0" class="item-quantity" min="1" value="1" required />
+        </div>
+        <div class="placeorder-item-actions">
+          <button type="button" class="remove-item-btn" title="Remove Item">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    `;
 
-  const itemNameSelect = document.createElement("select");
-  itemNameSelect.id = `itemName-${itemCount}`;
-  itemNameSelect.name = `items[${itemCount}].itemName`; // Name for form submission
-
-  // Populate dropdown with items and set prices
-  for (const itemName in itemPrices) {
-    const option = document.createElement("option");
-    option.value = itemName;
-    option.textContent = itemName;
-    itemNameSelect.appendChild(option);
-  }
-
-  const itemQuantityLabel = document.createElement("label");
-  itemQuantityLabel.textContent = "Quantity:";
-  itemQuantityLabel.hbsFor = `itemQuantity-${itemCount}`;
-
-  const itemQuantityInput = document.createElement("input");
-  itemQuantityInput.type = "number";
-  itemQuantityInput.id = `itemQuantity-${itemCount}`;
-  itemQuantityInput.name = `items[${itemCount}].quantity`; // Name for form submission
-
-  // Add event listener to update total amount on quantity change
-  itemQuantityInput.addEventListener("change", () => {
-    updateTotalAmount();
+        itemIndex = 1;
+        const initialItem = document.querySelector(".item-row");
+        if (initialItem) {
+          attachItemEventListeners(initialItem);
+        }
+        updateSummary();
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Failed to place order. Please try again.");
+      });
   });
 
-  item.appendChild(itemNameLabel);
-  item.appendChild(itemNameSelect);
-  item.appendChild(itemQuantityLabel);
-  item.appendChild(itemQuantityInput);
+document
+  .getElementById("placeorder-form")
+  .addEventListener("reset", function () {
+    setTimeout(() => {
+      document.getElementById("orderId").value = generateRandomOrderId();
 
-  itemsContainer.appendChild(item);
+      const itemsList = document.getElementById("items-list");
+      itemsList.innerHTML = `
+      <div class="placeorder-items-container item-row" data-item-index="0">
+        <div class="placeorder-item">
+          <label for="item-name-0">Item Name</label>
+          <input type="text" id="item-name-0" class="item-name" placeholder="Enter item name" required />
+        </div>
+        <div class="placeorder-item">
+          <label for="quantity-0">Quantity</label>
+          <input type="number" id="quantity-0" class="item-quantity" min="1" value="1" required />
+        </div>
+        <div class="placeorder-item-actions">
+          <button type="button" class="remove-item-btn" title="Remove Item">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    `;
 
-  updateTotalAmount(); // Update total amount after adding a new item
-});
-
-function updateTotalAmount() {
-  let total = 0;
-  const itemQuantities = document.querySelectorAll('input[type="number"]');
-  const itemNameSelects = document.querySelectorAll("select");
-
-  for (let i = 0; i < itemQuantities.length; i++) {
-    const itemName = itemNameSelects[i].value;
-    const quantity = parseFloat(itemQuantities[i].value) || 0; // Handle missing values
-    const price = itemPrices[itemName] || 0; // Get price from itemPrices object
-    total += quantity * price;
-  }
-
-  totalAmountSpan.textContent = total.toFixed(2); // Display total with 2 decimal places
-}
-
-orderForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-});
-
-// Rest of the code remains the same
-
-window.onload = function () {
-  // for date
-  const today = new Date();
-  const dd = String(today.getDate()).padStart(2, "0");
-  const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
-  const yyyy = today.getFullYear();
-
-  const formattedDate = yyyy + "-" + mm + "-" + dd;
-  document.getElementById("delivery-date").value = formattedDate;
-
-  // Generating the order ID
-  const randomOrderId = Math.floor(100000 + Math.random() * 900000);
-
-  const orderId = "ORD" + randomOrderId;
-
-  document.getElementById("orderId").value = orderId;
-};
-
-const gmailInput = document.getElementById("gmail");
-
-gmailInput.addEventListener("blur", function () {
-  const email = gmailInput.value;
-  const gmailPattern = /@gmail\.com$/;
-
-  if (!gmailPattern.test(email)) {
-    alert("Please enter a valid Gmail address.");
-    gmailInput.focus();
-  }
-});
-
-updateTotalAmount();
+      itemIndex = 1;
+      const initialItem = document.querySelector(".item-row");
+      if (initialItem) {
+        attachItemEventListeners(initialItem);
+      }
+      updateSummary();
+    }, 0);
+  });

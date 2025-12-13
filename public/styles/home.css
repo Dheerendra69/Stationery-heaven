@@ -220,7 +220,9 @@ p {
   color: #3b82f6;
   border: none;
   border-radius: 8px;
-  width: 130px;
+  width: 140px;
+  height: 30px;
+  margin-top: 0.5rem;
   transition: 0.3s;
 }
 
@@ -650,6 +652,7 @@ h1::after {
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
+  height: 40px;
 }
 
 .about-text .btn:hover {
@@ -1603,11 +1606,6 @@ h1::after {
 }
 
 @media screen and (max-width: 1400px) {
-  .btn {
-    width: 100px;
-    height: 30px;
-  }
-
   .seeSimilarProduct {
     width: 240px;
     height: 240px;

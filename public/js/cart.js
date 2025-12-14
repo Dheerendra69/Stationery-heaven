@@ -36,20 +36,6 @@ const cart = () => {
       return total + calculateTotalPrice(cartItem);
     }, 0);
 
-    // Fetch product details for each item in cartData
-    const cartItemsWithDetails = cartData.map((cartItem) => {
-      const product = getProductDetails(cartItem.product_id);
-      if (product) {
-        return {
-          id: product.id,
-          name: product.name,
-          price: product.price,
-          quantity: cartItem.quantity,
-        };
-      }
-      return null;
-    });
-
     localStorage.setItem("cart", JSON.stringify(shoppingCart));
     refreshCartHTML();
   };
@@ -125,10 +111,25 @@ const cart = () => {
 
       const shoppingCart = JSON.parse(cartData);
 
+      // Fetch product details for each item in cartData
+      const cartItemsWithDetails = shoppingCart.map((cartItem) => {
+        const product = getProductDetails(cartItem.product_id);
+        if (product) {
+          return {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            quantity: cartItem.quantity,
+          };
+        }
+        return null;
+      });
+      
       const orderPayload = {
-        items: shoppingCart,
+        items: cartItemsWithDetails,
         shop: STATIONERY_HEAVEN,
       };
+
       const token = localStorage.getItem("token");
 
       fetch("/check-out", {

@@ -107,6 +107,6 @@ OrderSchema.virtual("totalItems").get(function () {
 OrderSchema.set("toJSON", { virtuals: true });
 OrderSchema.set("toObject", { virtuals: true });
 
-const Order = mongoose.model("Order", OrderSchema);
+const Order = mongoose.model("guestOrder", OrderSchema);
 
 module.exports = Order;

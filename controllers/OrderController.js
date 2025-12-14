@@ -1,4 +1,4 @@
-const OrderDB = require("../models/Order");
+const OrderDB = require("../models/guestOrder");
 
 const saveOrder = async (req, res) => {
   try {

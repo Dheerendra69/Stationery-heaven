@@ -6,8 +6,10 @@ const saveCart = async (req, res) => {
     const { items, shop } = req.body;
     const { name, email } = req.user;
 
+    const totalOrders = await cartOrderDB.countDocuments();
+
     const newOrder = new cartOrderDB({
-      orderId: "ORD" + Math.floor(Math.random() * 1000000),
+      orderId: `ORD${totalOrders + 1}`,
       customerName: name,
       orderDate: new Date(),
       gmail: email,

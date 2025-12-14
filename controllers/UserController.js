@@ -44,7 +44,7 @@ const signupController = async (req, res) => {
     const newUser = { name, password, email };
     const result = await UserDB.insertOne(newUser);
 
-    const token = jwt.sign({ id: result.insertedId, name }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: result.insertedId, name, email }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 

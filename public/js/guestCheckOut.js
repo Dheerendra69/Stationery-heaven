@@ -1,7 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("orderId").value = generateRandomOrderId();
-  updateSummary();
-
   const today = new Date().toISOString().split("T")[0];
   document.getElementById("delivery-date").setAttribute("min", today);
 });
@@ -103,12 +100,6 @@ function getItemsData() {
   return itemsData;
 }
 
-function generateRandomOrderId() {
-  const prefix = "ORD";
-  const randomNum = Math.floor(100000 + Math.random() * 900000);
-  return `${prefix}${randomNum}`;
-}
-
 document
   .getElementById("placeorder-form")
   .addEventListener("submit", function (event) {
@@ -122,7 +113,6 @@ document
     }
 
     const orderData = {
-      orderId: document.getElementById("orderId").value,
       customerName: document.getElementById("name").value.trim(),
       email: document.getElementById("email").value.trim(),
       phone: document.getElementById("phone").value.trim(),
@@ -150,11 +140,10 @@ document
       })
       .then((data) => {
         alert(
-          `Order placed successfully! Your Order ID is: ${orderData.orderId}`
+          `Order placed successfully! Your Order ID is: ${data?.data?.orderId}`
         );
 
         document.getElementById("placeorder-form").reset();
-        document.getElementById("orderId").value = generateRandomOrderId();
 
         const itemsList = document.getElementById("items-list");
         itemsList.innerHTML = `
@@ -192,7 +181,6 @@ document
   .getElementById("placeorder-form")
   .addEventListener("reset", function () {
     setTimeout(() => {
-      document.getElementById("orderId").value = generateRandomOrderId();
 
       const itemsList = document.getElementById("items-list");
       itemsList.innerHTML = `

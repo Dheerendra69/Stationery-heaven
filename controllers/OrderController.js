@@ -1,9 +1,8 @@
-const OrderDB = require("../models/guestOrder");
+const GuestOrderDB = require("../models/guestOrder");
 
 const saveOrder = async (req, res) => {
   try {
     const {
-      orderId,
       customerName,
       email,
       phone,
@@ -16,7 +15,6 @@ const saveOrder = async (req, res) => {
     } = req.body;
 
     if (
-      !orderId ||
       !customerName ||
       !email ||
       !phone ||
@@ -34,15 +32,11 @@ const saveOrder = async (req, res) => {
       });
     }
 
-    const existingOrder = await OrderDB.findOne({ orderId });
-    if (existingOrder) {
-      return res.status(400).json({
-        success: false,
-        message: "Order ID already exists",
-      });
-    }
+    const totalOrders = await GuestOrderDB.countDocuments();
 
-    const newOrder = new OrderDB({
+    const orderId = `ORD${totalOrders + 1}`;
+
+    const newOrder = new GuestOrderDB({
       orderId,
       customerName,
       email,
@@ -80,13 +74,6 @@ const saveOrder = async (req, res) => {
       });
     }
 
-    if (error.code === 11000) {
-      return res.status(400).json({
-        success: false,
-        message: "Order ID already exists",
-      });
-    }
-
     res.status(500).json({
       success: false,
       message: "Failed to place order",
@@ -97,7 +84,7 @@ const saveOrder = async (req, res) => {
 
 const getAllOrders = async (req, res) => {
   try {
-    const orders = await OrderDB.find().sort({ orderDate: -1 }).limit(100);
+    const orders = await GuestOrderDB.find().sort({ orderDate: -1 }).limit(100);
 
     res.status(200).json({
       success: true,
@@ -116,7 +103,7 @@ const getAllOrders = async (req, res) => {
 
 const getOrderById = async (req, res) => {
   try {
-    const order = await OrderDB.findOne({ orderId: req.params.orderId });
+    const order = await GuestOrderDB.findOne({ orderId: req.params.orderId });
 
     if (!order) {
       return res.status(404).json({

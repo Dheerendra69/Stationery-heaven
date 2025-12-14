@@ -246,6 +246,10 @@ a:hover::after {
   width: 100%;
 }
 
+.button-container button{
+  height: auto;
+}
+
 .btn {
   background: linear-gradient(135deg, #b6ceb4, #a8c4a0);
   color: #2c3e50;
